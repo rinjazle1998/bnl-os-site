@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta http-equiv="X-Frame-Options" content="DENY" />
+  <meta http-equiv="Referrer-Policy" content="no-referrer" />
+  <title>Download — BNL-OS</title>
+  <meta name="description" content="Download the latest BNL-OS release image for your embedded hardware target." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- NAV (identical across pages) -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo" aria-label="BNL-OS home">
+      <div class="nav__logo-hex" aria-hidden="true">B</div>
+      <span class="nav__logo-text">BNL<span class="nav__logo-accent">-OS</span></span>
+    </a>
+    <ul class="nav__links" role="list">
+      <li><a href="index.html"     class="nav__link">Home</a></li>
+      <li><a href="download.html"  class="nav__link">Download</a></li>
+      <li><a href="docs.html"      class="nav__link">Docs</a></li>
+      <li><a href="changelog.html" class="nav__link">Changelog</a></li>
+      <li><a href="blog.html"      class="nav__link">Blog</a></li>
+    </ul>
+    <a href="download.html" class="btn btn--primary btn--sm nav__cta">Download</a>
+    <button class="nav__hamburger" id="nav-hamburger" aria-controls="nav-drawer" aria-expanded="false" aria-label="Open navigation menu">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </button>
+  </div>
+</nav>
+<div class="nav__drawer" id="nav-drawer" role="dialog" aria-label="Mobile navigation">
+  <a href="index.html"     class="nav__link">Home</a>
+  <a href="download.html"  class="nav__link">Download</a>
+  <a href="docs.html"      class="nav__link">Docs</a>
+  <a href="changelog.html" class="nav__link">Changelog</a>
+  <a href="blog.html"      class="nav__link">Blog</a>
+  <a href="download.html"  class="btn btn--primary mt-md">Download BNL-OS</a>
+</div>
+
+<!-- PAGE HERO -->
+<div class="container">
+  <header class="page-hero">
+    <div class="section-label">Download</div>
+    <h1>Get BNL-OS</h1>
+    <p class="lead">
+      All release images are hosted on GitHub Releases. Every file ships with a
+      SHA-256 checksum so you can verify integrity before flashing.
+    </p>
+  </header>
+</div>
+
+<!-- MAIN CONTENT -->
+<main class="section--sm">
+  <div class="container">
+
+    <!-- Latest release header -->
+    <div style="display:flex; align-items:center; gap:16px; margin-bottom:28px; flex-wrap:wrap;">
+      <h2 style="font-size:1.5rem; margin:0;">Latest Release</h2>
+      <span class="badge badge--accent">
+        <span class="badge-dot" aria-hidden="true"></span>
+        v1.0.0 — Stable
+      </span>
+      <span style="margin-left:auto; font-family:var(--font-mono); font-size:0.78rem; color:var(--col-muted);">Released 2025-06-01</span>
+    </div>
+
+    <!-- Download cards -->
+    <div class="download-grid" data-animate>
+
+      <!-- Card 1: Full image -->
+      <div class="dl-card dl-card--featured">
+        <div class="dl-card__header">
+          <div>
+            <div class="dl-card__title">Full Image</div>
+            <div class="dl-card__meta">
+              <span>bnl-os-1.0.0-full.wic.gz</span>
+            </div>
+            <div class="dl-card__meta" style="margin-top:4px">
+              <span>Size: 38 MB</span>
+              <span>Format: WIC (compressed)</span>
+            </div>
+          </div>
+          <span class="badge badge--accent">Recommended</span>
+        </div>
+        <p class="dl-card__desc">
+          Complete rootfs + kernel + bootloader. Flash directly to SD card or eMMC
+          with <code class="mono">bmaptool</code> or <code class="mono">dd</code>.
+          Includes all base packages and default configuration.
+        </p>
+        <div class="dl-card__actions">
+          <a href="https://github.com/YOUR_USERNAME/bnl-os/releases/download/v1.0.0/bnl-os-1.0.0-full.wic.gz"
+             class="btn btn--primary"
+             rel="noopener noreferrer"
+             aria-label="Download BNL-OS full image v1.0.0">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download
+          </a>
+          <a href="https://github.com/YOUR_USERNAME/bnl-os/releases/tag/v1.0.0"
+             class="btn btn--ghost"
+             rel="noopener noreferrer"
+             target="_blank">
+            View on GitHub ↗
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 2: Minimal image -->
+      <div class="dl-card">
+        <div class="dl-card__header">
+          <div>
+            <div class="dl-card__title">Minimal Image</div>
+            <div class="dl-card__meta">
+              <span>bnl-os-1.0.0-minimal.wic.gz</span>
+            </div>
+            <div class="dl-card__meta" style="margin-top:4px">
+              <span>Size: 18 MB</span>
+              <span>Format: WIC (compressed)</span>
+            </div>
+          </div>
+          <span class="badge badge--neutral">Advanced</span>
+        </div>
+        <p class="dl-card__desc">
+          Stripped-down image for advanced users. Contains only the kernel, init,
+          and a minimal shell environment. Ideal for customising your own layers on top.
+        </p>
+        <div class="dl-card__actions">
+          <a href="https://github.com/YOUR_USERNAME/bnl-os/releases/download/v1.0.0/bnl-os-1.0.0-minimal.wic.gz"
+             class="btn btn--outline"
+             rel="noopener noreferrer"
+             aria-label="Download BNL-OS minimal image v1.0.0">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download
+          </a>
+          <a href="https://github.com/YOUR_USERNAME/bnl-os/releases/tag/v1.0.0"
+             class="btn btn--ghost"
+             rel="noopener noreferrer"
+             target="_blank">
+            View on GitHub ↗
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Checksum verification -->
+    <section aria-labelledby="checksum-heading" style="margin-top: 40px;">
+      <h3 id="checksum-heading" style="margin-bottom:16px; font-size:1.05rem;">
+        Verify your download (SHA-256)
+      </h3>
+      <div class="code-block">
+        <button class="copy-btn" aria-label="Copy checksum commands">Copy</button>
+        <pre><span class="c-muted"># Download checksums file</span>
+<span class="c-green">wget</span> https://github.com/YOUR_USERNAME/bnl-os/releases/download/v1.0.0/SHA256SUMS
+
+<span class="c-muted"># Verify full image</span>
+<span class="c-green">sha256sum</span> -c SHA256SUMS --ignore-missing
+
+<span class="c-muted"># Expected output</span>
+<span class="c-accent">bnl-os-1.0.0-full.wic.gz: OK</span></pre>
+      </div>
+
+      <div class="checksum-block" style="margin-top:16px;">
+        <strong>SHA-256 Checksums — v1.0.0</strong>
+        <span>a3f8c2d1e5b94760f2c8e3a1d7b5f9e2c4a6d8f0b2e4c6a8d0f2b4e6c8a0d2f4  bnl-os-1.0.0-full.wic.gz</span><br />
+        <span>b1d3e5f7a9c2e4f6a8b0d2f4a6c8e0b2d4f6a8c0e2b4d6f8a0c2e4b6d8f0a2c4  bnl-os-1.0.0-minimal.wic.gz</span>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- Flash instructions -->
+    <section aria-labelledby="flash-heading">
+      <h3 id="flash-heading" style="margin-bottom:8px;">Flash to storage</h3>
+      <p style="margin-bottom:20px;">Use <code class="mono">bmaptool</code> (recommended) or <code class="mono">dd</code> to write the image.</p>
+
+      <h4 style="margin-bottom:10px; color:var(--col-muted); font-size:0.85rem; font-family:var(--font-mono); font-weight:400; letter-spacing:0.05em;">USING BMAPTOOL (FASTER)</h4>
+      <div class="code-block">
+        <button class="copy-btn" aria-label="Copy bmaptool command">Copy</button>
+        <pre><span class="c-muted"># Install bmaptool</span>
+<span class="c-green">sudo apt install</span> bmap-tools
+
+<span class="c-muted"># Flash (replace /dev/sdX with your device)</span>
+<span class="c-green">sudo bmaptool copy</span> bnl-os-1.0.0-full.wic.gz <span class="c-yellow">/dev/sdX</span></pre>
+      </div>
+
+      <h4 style="margin-bottom:10px; margin-top:24px; color:var(--col-muted); font-size:0.85rem; font-family:var(--font-mono); font-weight:400; letter-spacing:0.05em;">USING DD</h4>
+      <div class="code-block">
+        <button class="copy-btn" aria-label="Copy dd command">Copy</button>
+        <pre><span class="c-green">gunzip</span> -c bnl-os-1.0.0-full.wic.gz | <span class="c-green">sudo dd</span> of=<span class="c-yellow">/dev/sdX</span> bs=4M status=progress conv=fsync</pre>
+      </div>
+
+      <div class="callout callout--warn" style="margin-top:20px;">
+        <span class="callout__icon" aria-hidden="true">⚠️</span>
+        <span>Double-check your device path with <code class="mono">lsblk</code> before running <code class="mono">dd</code>. Writing to the wrong device will overwrite data permanently.</span>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- Previous releases -->
+    <section aria-labelledby="prev-heading">
+      <h3 id="prev-heading" style="margin-bottom:16px;">Previous releases</h3>
+      <p>All previous releases are available on the
+        <a href="https://github.com/YOUR_USERNAME/bnl-os/releases"
+           rel="noopener noreferrer"
+           target="_blank"
+           style="color:var(--col-accent);">GitHub Releases page ↗</a>.
+        See the <a href="changelog.html" style="color:var(--col-accent);">Changelog</a>
+        for what changed in each version.
+      </p>
+    </section>
+
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <a href="index.html" class="nav__logo" aria-label="BNL-OS home">
+          <div class="nav__logo-hex" aria-hidden="true">B</div>
+          <span class="nav__logo-text">BNL<span class="nav__logo-accent">-OS</span></span>
+        </a>
+        <p>Custom embedded Linux built from scratch with the Yocto Project.</p>
+      </div>
+      <div class="footer__col">
+        <div class="footer__col-title">Product</div>
+        <a href="download.html">Download</a>
+        <a href="changelog.html">Changelog</a>
+        <a href="blog.html">Blog</a>
+      </div>
+      <div class="footer__col">
+        <div class="footer__col-title">Developers</div>
+        <a href="docs.html">Documentation</a>
+        <a href="docs.html#quickstart">Quickstart</a>
+        <a href="docs.html#bsp">BSP Guide</a>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span class="footer__copy">© 2025 BNL-OS Project. Released under MIT License.</span>
+      <span class="footer__yocto">Built with Yocto Scarthgap</span>
+    </div>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

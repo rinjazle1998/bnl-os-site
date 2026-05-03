@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta http-equiv="X-Frame-Options" content="DENY" />
+  <meta http-equiv="Referrer-Policy" content="no-referrer" />
+  <title>Documentation — BNL-OS</title>
+  <meta name="description" content="BNL-OS documentation — quickstart, BSP guide, configuration, and Yocto layer reference." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo" aria-label="BNL-OS home">
+      <div class="nav__logo-hex" aria-hidden="true">B</div>
+      <span class="nav__logo-text">BNL<span class="nav__logo-accent">-OS</span></span>
+    </a>
+    <ul class="nav__links" role="list">
+      <li><a href="index.html"     class="nav__link">Home</a></li>
+      <li><a href="download.html"  class="nav__link">Download</a></li>
+      <li><a href="docs.html"      class="nav__link">Docs</a></li>
+      <li><a href="changelog.html" class="nav__link">Changelog</a></li>
+      <li><a href="blog.html"      class="nav__link">Blog</a></li>
+    </ul>
+    <a href="download.html" class="btn btn--primary btn--sm nav__cta">Download</a>
+    <button class="nav__hamburger" id="nav-hamburger" aria-controls="nav-drawer" aria-expanded="false" aria-label="Open navigation menu">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </button>
+  </div>
+</nav>
+<div class="nav__drawer" id="nav-drawer" role="dialog" aria-label="Mobile navigation">
+  <a href="index.html"     class="nav__link">Home</a>
+  <a href="download.html"  class="nav__link">Download</a>
+  <a href="docs.html"      class="nav__link">Docs</a>
+  <a href="changelog.html" class="nav__link">Changelog</a>
+  <a href="blog.html"      class="nav__link">Blog</a>
+  <a href="download.html"  class="btn btn--primary mt-md">Download BNL-OS</a>
+</div>
+
+<!-- DOCS LAYOUT -->
+<main>
+  <div class="container">
+    <div class="docs-layout">
+
+      <!-- Sidebar -->
+      <aside class="docs-sidebar" aria-label="Documentation navigation">
+        <nav>
+          <div class="docs-sidebar__group">
+            <div class="docs-sidebar__title">Getting started</div>
+            <a href="#introduction"  class="docs-sidebar__link">Introduction</a>
+            <a href="#requirements"  class="docs-sidebar__link">Requirements</a>
+            <a href="#quickstart"    class="docs-sidebar__link">Quickstart</a>
+          </div>
+          <div class="docs-sidebar__group">
+            <div class="docs-sidebar__title">Building</div>
+            <a href="#build-setup"   class="docs-sidebar__link">Build setup</a>
+            <a href="#layers"        class="docs-sidebar__link">Layers</a>
+            <a href="#bsp"           class="docs-sidebar__link">BSP guide</a>
+          </div>
+          <div class="docs-sidebar__group">
+            <div class="docs-sidebar__title">Configuration</div>
+            <a href="#local-conf"    class="docs-sidebar__link">local.conf</a>
+            <a href="#images"        class="docs-sidebar__link">Image targets</a>
+          </div>
+          <div class="docs-sidebar__group">
+            <div class="docs-sidebar__title">Deployment</div>
+            <a href="#flashing"      class="docs-sidebar__link">Flashing</a>
+            <a href="#ota"           class="docs-sidebar__link">OTA updates</a>
+          </div>
+        </nav>
+      </aside>
+
+      <!-- Content -->
+      <article class="docs-content">
+
+        <!-- Introduction -->
+        <section id="introduction">
+          <div class="section-label">Overview</div>
+          <h1>BNL-OS Documentation</h1>
+          <p>
+            BNL-OS is a custom embedded Linux distribution built entirely with the
+            <strong style="color:var(--col-text)">Yocto Project</strong> (Scarthgap / 5.0).
+            It is designed for constrained hardware targets where image size, boot time,
+            and security posture matter.
+          </p>
+          <p>
+            This documentation covers everything from setting up a build environment to
+            deploying OTA updates on target hardware.
+          </p>
+
+          <div class="callout callout--info">
+            <span class="callout__icon" aria-hidden="true">ℹ️</span>
+            <span>BNL-OS currently targets <strong>ARMv7</strong> and <strong>AArch64</strong> platforms. x86-64 support is experimental.</span>
+          </div>
+        </section>
+
+        <hr class="divider" />
+
+        <!-- Requirements -->
+        <section id="requirements">
+          <h2>Requirements</h2>
+          <p>Before building BNL-OS you need the following on your host machine:</p>
+
+          <h3>Host OS</h3>
+          <p>A 64-bit Linux host is required. The following distributions are tested and supported:</p>
+          <ul>
+            <li>Ubuntu 22.04 LTS or 24.04 LTS (recommended)</li>
+            <li>Debian 12 (Bookworm)</li>
+            <li>Fedora 39+</li>
+          </ul>
+
+          <h3>Hardware</h3>
+          <ul>
+            <li>At least <strong style="color:var(--col-text)">8 GB RAM</strong> (16 GB recommended)</li>
+            <li>At least <strong style="color:var(--col-text)">100 GB free disk space</strong></li>
+            <li>Multi-core CPU (build times scale linearly with core count)</li>
+          </ul>
+
+          <h3>Software</h3>
+          <div class="code-block">
+            <button class="copy-btn" aria-label="Copy package install command">Copy</button>
+            <pre><span class="c-muted"># Ubuntu / Debian</span>
+<span class="c-green">sudo apt update</span> &amp;&amp; <span class="c-green">sudo apt install</span> \
+  git wget curl python3 python3-pip \
+  gawk make gcc g++ diffstat texinfo \
+  chrpath socat libsdl1.2-dev pylint \
+  xterm liblz4-tool zstd</pre>
+          </div>
+        </section>
+
+        <hr class="divider" />
+
+        <!-- Quickstart -->
+        <section id="quickstart">
+          <h2>Quickstart</h2>
+          <p>The fastest way to get a working BNL-OS image running.</p>
+
+          <h3>1. Clone the repository</h3>
+          <div class="code-block">
+            <button class="copy-btn" aria-label="Copy clone command">Copy</button>
+            <pre><span class="c-green">git clone</span> https://github.com/YOUR_USERNAME/bnl-os.git
+<span class="c-green">cd</span> bnl-os</pre>
+          </div>
+
+          <h3>2. Initialise the build environment</h3>
+          <div class="code-block">
+            <button class="copy-btn" aria-label="Copy source command">Copy</button>
+            <pre><span class="c-green">source</span> oe-init-build-env build</pre>
+          </div>
+
+          <h3>3. Build the full image</h3>
+          <div class="code-block">
+            <button class="copy-btn" aria-label="Copy bitbake command">Copy</button>
+            <pre><span class="c-green">bitbake</span> bnl-image-full</pre>
+          </div>
+
+          <div class="callout callout--tip">
+            <span class="callout__icon" aria-hidden="true">💡</span>
+            <span>Initial builds take 2–4 hours depending on your CPU. Subsequent builds are incremental and much faster thanks to Yocto's shared-state cache.</span>
+          </div>
+
+          <h3>4. Find your image</h3>
+          <div class="code-block">
+            <button class="copy-btn" aria-label="Copy output path">Copy</button>
+            <pre><span class="c-muted"># Output images are in:</span>
+build/tmp/deploy/images/<span class="c-yellow">MACHINE</span>/bnl-image-full-<span class="c-yellow">MACHINE</span>.wic.gz</pre>
+          </div>
+        </section>
+
+        <hr class="divider" />
+
+        <!-- Build setup -->
+        <section id="build-setup">
+          <h2>Build setup</h2>
+          <p>
+            BNL-OS uses a <code class="mono">kas</code> configuration file for reproducible
+            layer management. This is the recommended approach over manually editing
+            <code class="mono">bblayers.conf</code>.
+          </p>
+          <div class="code-block">
+            <button class="copy-btn" aria-label="Copy kas install command">Copy</button>
+            <pre><span class="c-muted"># Install kas</span>
+<span class="c-green">pip3 install</span> kas
+
+<span class="c-muted"># Build using kas (handles layer cloning automatically)</span>
+<span class="c-green">kas build</span> kas/bnl-os.yml</pre>
+          </div>
+        </section>
+
+        <hr class="divider" />
+
+        <!-- Layers -->
+        <section id="layers">
+          <h2>Layers</h2>
+          <p>BNL-OS is composed of the following Yocto layers:</p>
+
+          <table style="width:100%; border-collapse:collapse; font-size:0.875rem; margin-bottom:var(--s5);">
+            <thead>
+              <tr style="border-bottom:1px solid var(--col-border);">
+                <th style="text-align:left; padding:10px 12px; color:var(--col-muted); font-family:var(--font-mono); font-weight:400; font-size:0.75rem; letter-spacing:0.05em;">LAYER</th>
+                <th style="text-align:left; padding:10px 12px; color:var(--col-muted); font-family:var(--font-mono); font-weight:400; font-size:0.75rem; letter-spacing:0.05em;">PURPOSE</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid var(--col-border);">
+                <td style="padding:10px 12px;"><code class="mono" style="color:var(--col-accent);">meta-bnl</code></td>
+                <td style="padding:10px 12px; color:var(--col-muted);">BNL-OS distro policy, image recipes, and custom configurations</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--col-border);">
+                <td style="padding:10px 12px;"><code class="mono" style="color:var(--col-blue);">meta-bnl-bsp</code></td>
+                <td style="padding:10px 12px; color:var(--col-muted);">Board Support Packages for supported hardware targets</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--col-border);">
+                <td style="padding:10px 12px;"><code class="mono" style="color:var(--col-muted);">meta-openembedded</code></td>
+                <td style="padding:10px 12px; color:var(--col-muted);">Extended OpenEmbedded package collection</td>
+              </tr>
+              <tr>
+                <td style="padding:10px 12px;"><code class="mono" style="color:var(--col-muted);">poky</code></td>
+                <td style="padding:10px 12px; color:var(--col-muted);">Yocto Project reference distro (upstream)</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <hr class="divider" />
+
+        <!-- BSP -->
+        <section id="bsp">
+          <h2>BSP Guide</h2>
+          <p>
+            The <code class="mono">meta-bnl-bsp</code> layer contains machine configurations
+            for supported hardware targets. To add a new machine, create a
+            <code class="mono">.conf</code> file under
+            <code class="mono">meta-bnl-bsp/conf/machine/</code>.
+          </p>
+          <div class="code-block">
+            <button class="copy-btn" aria-label="Copy machine config example">Copy</button>
+            <pre><span class="c-muted"># meta-bnl-bsp/conf/machine/bnl-rpi4.conf</span>
+<span class="c-green">require</span> conf/machine/include/rpi-base.inc
+
+<span class="c-yellow">MACHINE_FEATURES</span> += <span class="c-accent">"wifi bluetooth"</span>
+<span class="c-yellow">KERNEL_DEVICETREE</span>  = <span class="c-accent">"broadcom/bcm2711-rpi-4-b.dtb"</span>
+<span class="c-yellow">UBOOT_MACHINE</span>      = <span class="c-accent">"rpi_4_defconfig"</span>
+<span class="c-yellow">PREFERRED_PROVIDER_virtual/kernel</span> = <span class="c-accent">"linux-bnl"</span></pre>
+          </div>
+        </section>
+
+        <hr class="divider" />
+
+        <!-- local.conf -->
+        <section id="local-conf">
+          <h2>local.conf</h2>
+          <p>Key variables to set in <code class="mono">build/conf/local.conf</code>:</p>
+          <div class="code-block">
+            <button class="copy-btn" aria-label="Copy local.conf example">Copy</button>
+            <pre><span class="c-muted"># Target machine</span>
+<span class="c-yellow">MACHINE</span> = <span class="c-accent">"bnl-rpi4"</span>
+
+<span class="c-muted"># Parallel build threads (set to your CPU core count)</span>
+<span class="c-yellow">BB_NUMBER_THREADS</span> = <span class="c-accent">"8"</span>
+<span class="c-yellow">PARALLEL_MAKE</span>    = <span class="c-accent">"-j8"</span>
+
+<span class="c-muted"># Shared state and download directories (speeds up rebuilds)</span>
+<span class="c-yellow">SSTATE_DIR</span>  = <span class="c-accent">"/opt/yocto/sstate-cache"</span>
+<span class="c-yellow">DL_DIR</span>      = <span class="c-accent">"/opt/yocto/downloads"</span>
+
+<span class="c-muted"># Enable read-only rootfs</span>
+<span class="c-yellow">EXTRA_IMAGE_FEATURES</span> += <span class="c-accent">"read-only-rootfs"</span></pre>
+          </div>
+        </section>
+
+        <hr class="divider" />
+
+        <!-- Image targets -->
+        <section id="images">
+          <h2>Image targets</h2>
+          <p>BNL-OS provides three image targets:</p>
+          <ul>
+            <li><code class="mono" style="color:var(--col-accent);">bnl-image-minimal</code> — kernel + init + busybox only</li>
+            <li><code class="mono" style="color:var(--col-accent);">bnl-image-full</code> — recommended; includes networking, dropbear SSH, and base utilities</li>
+            <li><code class="mono" style="color:var(--col-accent);">bnl-image-dev</code> — full image plus development tools (gcc, gdb, strace)</li>
+          </ul>
+        </section>
+
+        <hr class="divider" />
+
+        <!-- Flashing -->
+        <section id="flashing">
+          <h2>Flashing</h2>
+          <p>See the <a href="download.html#flash-heading" style="color:var(--col-accent);">Download page</a> for detailed flashing instructions using <code class="mono">bmaptool</code> and <code class="mono">dd</code>.</p>
+        </section>
+
+        <hr class="divider" />
+
+        <!-- OTA -->
+        <section id="ota">
+          <h2>OTA updates</h2>
+          <p>
+            BNL-OS uses an A/B (dual-bank) partition layout. At runtime, one bank is
+            active while the other is available for updates. After a successful update,
+            the bootloader flips the active bank. If the new bank fails to boot three
+            times, it automatically reverts to the previous good bank.
+          </p>
+
+          <h3>Trigger an OTA update manually</h3>
+          <div class="code-block">
+            <button class="copy-btn" aria-label="Copy OTA update command">Copy</button>
+            <pre><span class="c-muted"># Check current active slot</span>
+<span class="c-green">bnl-update</span> --status
+
+<span class="c-muted"># Apply an update bundle</span>
+<span class="c-green">bnl-update</span> --apply /path/to/bnl-os-1.1.0.swu
+
+<span class="c-muted"># Reboot to activate</span>
+<span class="c-green">reboot</span></pre>
+          </div>
+
+          <div class="callout callout--tip">
+            <span class="callout__icon" aria-hidden="true">💡</span>
+            <span>Update bundles (<code class="mono">.swu</code>) are generated by the <code class="mono">bnl-image-update</code> BitBake target and are signed with a device-specific key.</span>
+          </div>
+        </section>
+
+      </article>
+    </div>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <a href="index.html" class="nav__logo" aria-label="BNL-OS home">
+          <div class="nav__logo-hex" aria-hidden="true">B</div>
+          <span class="nav__logo-text">BNL<span class="nav__logo-accent">-OS</span></span>
+        </a>
+        <p>Custom embedded Linux built from scratch with the Yocto Project.</p>
+      </div>
+      <div class="footer__col">
+        <div class="footer__col-title">Product</div>
+        <a href="download.html">Download</a>
+        <a href="changelog.html">Changelog</a>
+        <a href="blog.html">Blog</a>
+      </div>
+      <div class="footer__col">
+        <div class="footer__col-title">Developers</div>
+        <a href="docs.html">Documentation</a>
+        <a href="docs.html#quickstart">Quickstart</a>
+        <a href="docs.html#bsp">BSP Guide</a>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span class="footer__copy">© 2025 BNL-OS Project. Released under MIT License.</span>
+      <span class="footer__yocto">Built with Yocto Scarthgap</span>
+    </div>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

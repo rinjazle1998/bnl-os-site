@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta http-equiv="X-Frame-Options" content="DENY" />
+  <meta http-equiv="Referrer-Policy" content="no-referrer" />
+  <title>BNL-OS — Embedded Linux Distribution</title>
+  <meta name="description" content="BNL-OS is a custom embedded Linux distribution built from scratch with Yocto Project — minimal, secure, and production-ready." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ══ NAVIGATION ══════════════════════════════════════════════ -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo" aria-label="BNL-OS home">
+      <div class="nav__logo-hex" aria-hidden="true">B</div>
+      <span class="nav__logo-text">BNL<span class="nav__logo-accent">-OS</span></span>
+    </a>
+    <ul class="nav__links" role="list">
+      <li><a href="index.html"     class="nav__link">Home</a></li>
+      <li><a href="download.html"  class="nav__link">Download</a></li>
+      <li><a href="docs.html"      class="nav__link">Docs</a></li>
+      <li><a href="changelog.html" class="nav__link">Changelog</a></li>
+      <li><a href="blog.html"      class="nav__link">Blog</a></li>
+    </ul>
+    <a href="download.html" class="btn btn--primary btn--sm nav__cta">Download</a>
+    <button class="nav__hamburger" id="nav-hamburger" aria-controls="nav-drawer" aria-expanded="false" aria-label="Open navigation menu">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile drawer -->
+<div class="nav__drawer" id="nav-drawer" role="dialog" aria-label="Mobile navigation">
+  <a href="index.html"     class="nav__link">Home</a>
+  <a href="download.html"  class="nav__link">Download</a>
+  <a href="docs.html"      class="nav__link">Docs</a>
+  <a href="changelog.html" class="nav__link">Changelog</a>
+  <a href="blog.html"      class="nav__link">Blog</a>
+  <a href="download.html"  class="btn btn--primary mt-md">Download BNL-OS</a>
+</div>
+
+<!-- ══ HERO ════════════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero__glow" aria-hidden="true"></div>
+  <div class="container">
+    <div class="hero__content">
+
+      <!-- Left -->
+      <div class="hero__left">
+        <div class="badge badge--accent hero__badge anim-fade-up" style="--delay:0.05s">
+          <span class="badge-dot" aria-hidden="true"></span>
+          Latest: v1.0.0 — Scarthgap
+        </div>
+
+        <h1 class="hero__title anim-fade-up" style="--delay:0.15s">
+          Embedded Linux.<br>
+          <span class="gradient-text">Purpose-built.</span>
+        </h1>
+
+        <p class="hero__desc anim-fade-up" style="--delay:0.25s">
+          BNL-OS is a custom embedded Linux distribution built from the ground up
+          with the Yocto Project — minimal, security-hardened, and ready for
+          production target hardware.
+        </p>
+
+        <div class="hero__actions anim-fade-up" style="--delay:0.35s">
+          <a href="download.html" class="btn btn--primary btn--lg">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download v1.0.0
+          </a>
+          <a href="docs.html" class="btn btn--ghost btn--lg">Read the docs →</a>
+        </div>
+
+        <div class="hero__meta anim-fade-up" style="--delay:0.45s">
+          <span class="hero__meta-item">Kernel 6.6 LTS</span>
+          <span class="hero__meta-sep" aria-hidden="true">·</span>
+          <span class="hero__meta-item">Yocto Scarthgap</span>
+          <span class="hero__meta-sep" aria-hidden="true">·</span>
+          <span class="hero__meta-item">MIT License</span>
+        </div>
+      </div>
+
+      <!-- Right: Terminal -->
+      <div class="hero__right anim-fade-up" style="--delay:0.3s">
+        <div class="terminal" role="img" aria-label="BNL-OS terminal output example">
+          <div class="terminal__bar">
+            <span class="terminal__dot terminal__dot--red"    aria-hidden="true"></span>
+            <span class="terminal__dot terminal__dot--yellow" aria-hidden="true"></span>
+            <span class="terminal__dot terminal__dot--green"  aria-hidden="true"></span>
+            <span class="terminal__title">bnl-os — bash</span>
+          </div>
+          <div class="terminal__body">
+            <div class="terminal__line">
+              <span class="terminal__prompt">$</span>
+              <span class="terminal__cmd">cat /etc/bnl-release</span>
+            </div>
+            <div class="terminal__out">BNL-OS 1.0.0 (Yocto Scarthgap)</div>
+            <div class="terminal__out">Built for embedded targets — 2025</div>
+            <div class="terminal__line" style="margin-top:6px">
+              <span class="terminal__prompt">$</span>
+              <span class="terminal__cmd">uname -r</span>
+            </div>
+            <div class="terminal__out">6.6.21-bnl</div>
+            <div class="terminal__line" style="margin-top:6px">
+              <span class="terminal__prompt">$</span>
+              <span class="terminal__cmd">df -h /</span>
+            </div>
+            <div class="terminal__out">Filesystem      Size  Used  Avail</div>
+            <div class="terminal__out">/dev/mmcblk0p2   48M   31M    14M</div>
+            <div class="terminal__line" style="margin-top:6px">
+              <span class="terminal__prompt">$</span>
+              <span class="terminal__cmd">systemctl status bnl-init</span>
+            </div>
+            <div class="terminal__ok">● bnl-init — active (running) ✓</div>
+            <div class="terminal__line" style="margin-top:6px">
+              <span class="terminal__prompt">$</span>
+              <span class="terminal__cursor" aria-hidden="true">▋</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ STATS BAR ═══════════════════════════════════════════════ -->
+<div class="stats-bar">
+  <div class="container">
+    <div class="stats-bar__grid">
+      <div class="stat" data-animate>
+        <div class="stat__num">1<span class="accent">.0</span></div>
+        <div class="stat__label">Stable release</div>
+      </div>
+      <div class="stat" data-animate>
+        <div class="stat__num">6<span class="accent">.6</span></div>
+        <div class="stat__label">Linux kernel LTS</div>
+      </div>
+      <div class="stat" data-animate>
+        <div class="stat__num">&lt;50<span class="accent">MB</span></div>
+        <div class="stat__label">Base image size</div>
+      </div>
+      <div class="stat" data-animate>
+        <div class="stat__num">128<span class="accent">MB</span></div>
+        <div class="stat__label">Minimum RAM</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FEATURES ════════════════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <header class="section-header section-header--center">
+      <div class="section-label">Why BNL-OS</div>
+      <h2 class="section-title">Built for the edge,<br>not the cloud.</h2>
+      <p class="section-sub">Every decision in BNL-OS was made with constrained hardware and production reliability in mind.</p>
+    </header>
+
+    <div class="features-grid">
+
+      <div class="feature-card" data-animate>
+        <div class="feature-card__icon" aria-hidden="true">⚙️</div>
+        <h3>Yocto-native</h3>
+        <p>Every layer, recipe, and BSP is version-controlled with BitBake. Fully reproducible builds across machines.</p>
+      </div>
+
+      <div class="feature-card" data-animate>
+        <div class="feature-card__icon" aria-hidden="true">🔒</div>
+        <h3>Security-hardened</h3>
+        <p>Minimal attack surface. No unnecessary daemons. Read-only rootfs by default with dm-verity integrity checks.</p>
+      </div>
+
+      <div class="feature-card" data-animate>
+        <div class="feature-card__icon" aria-hidden="true">⚡</div>
+        <h3>Fast boot</h3>
+        <p>Optimized systemd unit ordering and suppressed unused services yield sub-3-second boot on target hardware.</p>
+      </div>
+
+      <div class="feature-card" data-animate>
+        <div class="feature-card__icon" aria-hidden="true">🔄</div>
+        <h3>A/B OTA updates</h3>
+        <p>Dual-bank partition layout with atomic flipping. Failed updates automatically roll back to the previous good slot.</p>
+      </div>
+
+      <div class="feature-card" data-animate>
+        <div class="feature-card__icon" aria-hidden="true">📦</div>
+        <h3>Minimal footprint</h3>
+        <p>Under 50 MB rootfs. Runs on hardware with as little as 128 MB RAM, suitable for deeply embedded targets.</p>
+      </div>
+
+      <div class="feature-card" data-animate>
+        <div class="feature-card__icon" aria-hidden="true">🧩</div>
+        <h3>Modular layers</h3>
+        <p>Compose your image by including only the Yocto layers you need — networking, app runtime, BSP, crypto and more.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA ═════════════════════════════════════════════════════ -->
+<section class="section--sm">
+  <div class="container">
+    <div class="cta-block" data-animate>
+      <h2>Start building today.</h2>
+      <p>Download the latest release or read the full documentation to get BNL-OS running on your hardware.</p>
+      <div class="cta-block__actions">
+        <a href="download.html" class="btn btn--primary btn--lg">Download BNL-OS</a>
+        <a href="docs.html"     class="btn btn--outline  btn--lg">Documentation</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══════════════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <a href="index.html" class="nav__logo" aria-label="BNL-OS home">
+          <div class="nav__logo-hex" aria-hidden="true">B</div>
+          <span class="nav__logo-text">BNL<span class="nav__logo-accent">-OS</span></span>
+        </a>
+        <p>Custom embedded Linux built from scratch with the Yocto Project.</p>
+      </div>
+      <div class="footer__col">
+        <div class="footer__col-title">Product</div>
+        <a href="download.html">Download</a>
+        <a href="changelog.html">Changelog</a>
+        <a href="blog.html">Blog</a>
+      </div>
+      <div class="footer__col">
+        <div class="footer__col-title">Developers</div>
+        <a href="docs.html">Documentation</a>
+        <a href="docs.html#quickstart">Quickstart</a>
+        <a href="docs.html#bsp">BSP Guide</a>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span class="footer__copy">© 2025 BNL-OS Project. Released under MIT License.</span>
+      <span class="footer__yocto">Built with Yocto Scarthgap</span>
+    </div>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
