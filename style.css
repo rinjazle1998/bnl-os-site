@@ -249,12 +249,13 @@ p  { color: var(--col-muted); font-size: 1rem; }
   text-decoration: none;
 }
 .nav__logo-svg {
-  width: 32px; height: 32px;
+  width: 38px; height: 38px;
   flex-shrink: 0;
-  transition: filter var(--t-normal);
+  transition: filter var(--t-normal), transform var(--t-normal);
 }
 .nav__logo:hover .nav__logo-svg {
-  filter: drop-shadow(0 0 6px rgba(0,212,170,0.55));
+  filter: drop-shadow(0 0 8px rgba(0,212,170,0.7));
+  transform: scale(1.06);
 }
 .nav__logo-text { color: var(--col-text); }
 .nav__logo-accent { color: var(--col-accent); }
