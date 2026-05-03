@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta http-equiv="X-Frame-Options" content="DENY" />
+  <meta http-equiv="Referrer-Policy" content="no-referrer" />
+  <title>BNL-OS — Embedded Linux Distribution</title>
+  <meta name="description" content="BNL-OS is a custom embedded Linux distribution being built with Yocto Project. Currently in development." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .status-card {
+      background: var(--col-surface);
+      border: 1px solid var(--col-border);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+    }
+    .status-card__head {
+      background: var(--col-surface2);
+      border-bottom: 1px solid var(--col-border);
+      padding: 12px 20px;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--col-dim);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .status-card__head::before {
+      content: '';
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--col-yellow);
+      animation: pulse-dot 1.8s ease infinite;
+    }
+    .status-card__body { padding: 8px 0; }
+    .status-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 11px 20px;
+      gap: var(--s3);
+      border-bottom: 1px solid var(--col-border);
+    }
+    .status-row:last-child { border-bottom: none; }
+    .status-row__label {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--col-muted);
+    }
+    .s-pill {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 2px 10px; border-radius: 100px;
+      font-family: var(--font-mono); font-size: 0.7rem; font-weight: 500;
+      white-space: nowrap;
+    }
+    .s-pill__dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+    .s-pill--done { background: rgba(74,222,128,0.1); border: 1px solid rgba(74,222,128,0.25); color: var(--col-green); }
+    .s-pill--wip  { background: rgba(245,197,66,0.1);  border: 1px solid rgba(245,197,66,0.25);  color: var(--col-yellow); }
+    .s-pill--wip .s-pill__dot { animation: pulse-dot 1.8s ease infinite; }
+    .s-pill--todo { background: rgba(255,255,255,0.03); border: 1px solid var(--col-border); color: var(--col-dim); }
+
+    .status-card__footer {
+      padding: 14px 20px;
+      border-top: 1px solid var(--col-border);
+    }
+    .progress-header {
+      display: flex; justify-content: space-between; align-items: baseline;
+      margin-bottom: 8px;
+    }
+    .progress-header span:first-child {
+      font-family: var(--font-mono); font-size: 0.72rem; color: var(--col-muted);
+    }
+    .progress-pct {
+      font-family: var(--font-display); font-size: 0.95rem; font-weight: 700;
+      color: var(--col-yellow);
+    }
+    .progress-track {
+      height: 5px; background: rgba(255,255,255,0.06);
+      border-radius: 100px; overflow: hidden;
+    }
+    .progress-track__fill {
+      height: 100%; width: 55%;
+      background: linear-gradient(90deg, var(--col-yellow), #ffe580);
+      border-radius: 100px;
+      animation: shimmer 2.5s ease-in-out infinite;
+    }
+    @keyframes shimmer { 0%,100%{opacity:1} 50%{opacity:0.55} }
+  </style>
+</head>
+<body>
+
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo" aria-label="BNL-OS home">
+      <svg class="nav__logo-svg" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <polygon points="16,1 29,8.5 29,23.5 16,31 3,23.5 3,8.5" fill="none" stroke="#00d4aa" stroke-width="1.4" opacity="0.5"/>
+        <rect x="9" y="9" width="14" height="14" rx="2.5" fill="#00d4aa" opacity="0.12"/>
+        <rect x="9" y="9" width="14" height="14" rx="2.5" fill="none" stroke="#00d4aa" stroke-width="1.4"/>
+        <line x1="13" y1="9"  x2="13" y2="6"  stroke="#00d4aa" stroke-width="1.2" stroke-linecap="round"/>
+        <line x1="16" y1="9"  x2="16" y2="6"  stroke="#00d4aa" stroke-width="1.2" stroke-linecap="round"/>
+        <line x1="19" y1="9"  x2="19" y2="6"  stroke="#00d4aa" stroke-width="1.2" stroke-linecap="round"/>
+        <line x1="13" y1="23" x2="13" y2="26" stroke="#00d4aa" stroke-width="1.2" stroke-linecap="round"/>
+        <line x1="16" y1="23" x2="16" y2="26" stroke="#00d4aa" stroke-width="1.2" stroke-linecap="round"/>
+        <line x1="19" y1="23" x2="19" y2="26" stroke="#00d4aa" stroke-width="1.2" stroke-linecap="round"/>
+        <line x1="9"  y1="13" x2="6"  y2="13" stroke="#00d4aa" stroke-width="1.2" stroke-linecap="round"/>
+        <line x1="9"  y1="19" x2="6"  y2="19" stroke="#00d4aa" stroke-width="1.2" stroke-linecap="round"/>
+        <line x1="23" y1="13" x2="26" y2="13" stroke="#00d4aa" stroke-width="1.2" stroke-linecap="round"/>
+        <line x1="23" y1="19" x2="26" y2="19" stroke="#00d4aa" stroke-width="1.2" stroke-linecap="round"/>
+        <circle cx="16" cy="16" r="2.2" fill="#00d4aa"/>
+      </svg>
+      <span class="nav__logo-text">BNL<span class="nav__logo-accent">-OS</span></span>
+    </a>
+    <ul class="nav__links" role="list">
+      <li><a href="index.html"     class="nav__link">Home</a></li>
+      <li><a href="download.html"  class="nav__link">Download</a></li>
+      <li><a href="docs.html"      class="nav__link">Docs</a></li>
+      <li><a href="changelog.html" class="nav__link">Changelog</a></li>
+      <li><a href="blog.html"      class="nav__link">Blog</a></li>
+    </ul>
+    <a href="download.html" class="btn btn--primary btn--sm nav__cta">Release status</a>
+    <button class="nav__hamburger" id="nav-hamburger" aria-controls="nav-drawer" aria-expanded="false" aria-label="Open navigation menu">
+      <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+    </button>
+  </div>
+</nav>
+<div class="nav__drawer" id="nav-drawer" role="dialog" aria-label="Mobile navigation">
+  <a href="index.html"     class="nav__link">Home</a>
+  <a href="download.html"  class="nav__link">Download</a>
+  <a href="docs.html"      class="nav__link">Docs</a>
+  <a href="changelog.html" class="nav__link">Changelog</a>
+  <a href="blog.html"      class="nav__link">Blog</a>
+  <a href="download.html"  class="btn btn--ghost mt-md">Release status</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero__glow" aria-hidden="true"></div>
+  <div class="container">
+    <div class="hero__content">
+
+      <div class="hero__left">
+        <div class="badge hero__badge anim-fade-up" style="--delay:0.05s; background:rgba(245,197,66,0.1); border:1px solid rgba(245,197,66,0.28); color:var(--col-yellow);">
+          <span class="badge-dot" aria-hidden="true" style="background:var(--col-yellow);"></span>
+          In active development — no release yet
+        </div>
+
+        <h1 class="hero__title anim-fade-up" style="--delay:0.15s">
+          Embedded Linux.<br>
+          <span class="gradient-text">Purpose-built.</span>
+        </h1>
+
+        <p class="hero__desc anim-fade-up" style="--delay:0.25s">
+          BNL-OS is a custom embedded Linux distribution being built from the ground up
+          with the Yocto Project — minimal, security-hardened, and designed
+          for production target hardware.
+        </p>
+
+        <div class="hero__actions anim-fade-up" style="--delay:0.35s">
+          <a href="download.html" class="btn btn--ghost btn--lg">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Release status
+          </a>
+          <a href="docs.html" class="btn btn--ghost btn--lg">Read the docs →</a>
+        </div>
+
+        <div class="hero__meta anim-fade-up" style="--delay:0.45s">
+          <span class="hero__meta-item">Kernel 6.6 LTS</span>
+          <span class="hero__meta-sep" aria-hidden="true">·</span>
+          <span class="hero__meta-item">Yocto Scarthgap</span>
+          <span class="hero__meta-sep" aria-hidden="true">·</span>
+          <span class="hero__meta-item">MIT License</span>
+        </div>
+      </div>
+
+      <!-- Right: real build status, not fake terminal -->
+      <div class="hero__right anim-fade-up" style="--delay:0.3s">
+        <div class="status-card">
+          <div class="status-card__head">Build progress — v1.0.0</div>
+          <div class="status-card__body">
+            <div class="status-row">
+              <span class="status-row__label">Yocto layer setup</span>
+              <span class="s-pill s-pill--done"><span class="s-pill__dot" aria-hidden="true"></span>Done</span>
+            </div>
+            <div class="status-row">
+              <span class="status-row__label">Kernel configuration</span>
+              <span class="s-pill s-pill--done"><span class="s-pill__dot" aria-hidden="true"></span>Done</span>
+            </div>
+            <div class="status-row">
+              <span class="status-row__label">BSP (Board Support Package)</span>
+              <span class="s-pill s-pill--wip"><span class="s-pill__dot" aria-hidden="true"></span>In progress</span>
+            </div>
+            <div class="status-row">
+              <span class="status-row__label">Full image build</span>
+              <span class="s-pill s-pill--wip"><span class="s-pill__dot" aria-hidden="true"></span>In progress</span>
+            </div>
+            <div class="status-row">
+              <span class="status-row__label">Hardware testing</span>
+              <span class="s-pill s-pill--todo"><span class="s-pill__dot" aria-hidden="true"></span>Pending</span>
+            </div>
+            <div class="status-row">
+              <span class="status-row__label">Public release</span>
+              <span class="s-pill s-pill--todo"><span class="s-pill__dot" aria-hidden="true"></span>Pending</span>
+            </div>
+          </div>
+          <div class="status-card__footer">
+            <div class="progress-header">
+              <span>Overall progress</span>
+              <span class="progress-pct">~55%</span>
+            </div>
+            <div class="progress-track" role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100" aria-label="Build progress 55 percent">
+              <div class="progress-track__fill"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="container">
+    <div class="stats-bar__grid">
+      <div class="stat" data-animate>
+        <div class="stat__num">6<span class="accent">.6</span></div>
+        <div class="stat__label">Linux kernel LTS</div>
+      </div>
+      <div class="stat" data-animate>
+        <div class="stat__num">Yocto</div>
+        <div class="stat__label">Scarthgap (5.0)</div>
+      </div>
+      <div class="stat" data-animate>
+        <div class="stat__num">&lt;50<span class="accent">MB</span></div>
+        <div class="stat__label">Target image size</div>
+      </div>
+      <div class="stat" data-animate>
+        <div class="stat__num">128<span class="accent">MB</span></div>
+        <div class="stat__label">Minimum RAM</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section class="section">
+  <div class="container">
+    <header class="section-header section-header--center">
+      <div class="section-label">Design goals</div>
+      <h2 class="section-title">Built for the edge,<br>not the cloud.</h2>
+      <p class="section-sub">Every decision in BNL-OS is made with constrained hardware and production reliability in mind.</p>
+    </header>
+    <div class="features-grid">
+      <div class="feature-card" data-animate>
+        <div class="feature-card__icon" aria-hidden="true">⚙️</div>
+        <h3>Yocto-native</h3>
+        <p>Every layer, recipe, and BSP is version-controlled with BitBake. Fully reproducible builds across machines.</p>
+      </div>
+      <div class="feature-card" data-animate>
+        <div class="feature-card__icon" aria-hidden="true">🔒</div>
+        <h3>Security-hardened</h3>
+        <p>Minimal attack surface. No unnecessary daemons. Read-only rootfs with dm-verity integrity verification.</p>
+      </div>
+      <div class="feature-card" data-animate>
+        <div class="feature-card__icon" aria-hidden="true">⚡</div>
+        <h3>Fast boot</h3>
+        <p>Optimized systemd unit ordering and suppressed unused services for sub-3-second boot on target hardware.</p>
+      </div>
+      <div class="feature-card" data-animate>
+        <div class="feature-card__icon" aria-hidden="true">🔄</div>
+        <h3>A/B OTA updates</h3>
+        <p>Dual-bank partition layout with atomic flipping. Failed updates automatically roll back to the previous good slot.</p>
+      </div>
+      <div class="feature-card" data-animate>
+        <div class="feature-card__icon" aria-hidden="true">📦</div>
+        <h3>Minimal footprint</h3>
+        <p>Target under 50 MB rootfs. Suitable for hardware with as little as 128 MB RAM.</p>
+      </div>
+      <div class="feature-card" data-animate>
+        <div class="feature-card__icon" aria-hidden="true">🧩</div>
+        <h3>Modular layers</h3>
+        <p>Compose your image by including only the Yocto layers you need — networking, app runtime, BSP, and more.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section--sm">
+  <div class="container">
+    <div class="cta-block" data-animate>
+      <h2>Follow the development.</h2>
+      <p>BNL-OS is actively being built. Read the architecture docs or watch the changelog for updates.</p>
+      <div class="cta-block__actions">
+        <a href="docs.html"      class="btn btn--primary btn--lg">Read the Docs</a>
+        <a href="changelog.html" class="btn btn--outline  btn--lg">View Changelog</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <a href="index.html" class="nav__logo" aria-label="BNL-OS home">
+          <svg class="nav__logo-svg" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <polygon points="16,1 29,8.5 29,23.5 16,31 3,23.5 3,8.5" fill="none" stroke="#00d4aa" stroke-width="1.4" opacity="0.5"/>
+        <rect x="9" y="9" width="14" height="14" rx="2.5" fill="#00d4aa" opacity="0.12"/>
+        <rect x="9" y="9" width="14" height="14" rx="2.5" fill="none" stroke="#00d4aa" stroke-width="1.4"/>
+        <line x1="13" y1="9"  x2="13" y2="6"  stroke="#00d4aa" stroke-width="1.2" stroke-linecap="round"/>
+        <line x1="16" y1="9"  x2="16" y2="6"  stroke="#00d4aa" stroke-width="1.2" stroke-linecap="round"/>
+        <line x1="19" y1="9"  x2="19" y2="6"  stroke="#00d4aa" stroke-width="1.2" stroke-linecap="round"/>
+        <line x1="13" y1="23" x2="13" y2="26" stroke="#00d4aa" stroke-width="1.2" stroke-linecap="round"/>
+        <line x1="16" y1="23" x2="16" y2="26" stroke="#00d4aa" stroke-width="1.2" stroke-linecap="round"/>
+        <line x1="19" y1="23" x2="19" y2="26" stroke="#00d4aa" stroke-width="1.2" stroke-linecap="round"/>
+        <line x1="9"  y1="13" x2="6"  y2="13" stroke="#00d4aa" stroke-width="1.2" stroke-linecap="round"/>
+        <line x1="9"  y1="19" x2="6"  y2="19" stroke="#00d4aa" stroke-width="1.2" stroke-linecap="round"/>
+        <line x1="23" y1="13" x2="26" y2="13" stroke="#00d4aa" stroke-width="1.2" stroke-linecap="round"/>
+        <line x1="23" y1="19" x2="26" y2="19" stroke="#00d4aa" stroke-width="1.2" stroke-linecap="round"/>
+        <circle cx="16" cy="16" r="2.2" fill="#00d4aa"/>
+      </svg>
+          <span class="nav__logo-text">BNL<span class="nav__logo-accent">-OS</span></span>
+        </a>
+        <p>Custom embedded Linux built from scratch with the Yocto Project.</p>
+      </div>
+      <div class="footer__col">
+        <div class="footer__col-title">Product</div>
+        <a href="download.html">Download</a>
+        <a href="changelog.html">Changelog</a>
+        <a href="blog.html">Blog</a>
+      </div>
+      <div class="footer__col">
+        <div class="footer__col-title">Developers</div>
+        <a href="docs.html">Documentation</a>
+        <a href="docs.html#quickstart">Quickstart</a>
+        <a href="docs.html#bsp">BSP Guide</a>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span class="footer__copy">© 2025 BNL-OS Project. Released under MIT License.</span>
+      <span class="footer__yocto">Built with Yocto Scarthgap</span>
+    </div>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
