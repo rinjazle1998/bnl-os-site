@@ -70,28 +70,23 @@
       <aside class="docs-sidebar" aria-label="Documentation navigation">
         <nav>
           <div class="docs-sidebar__group">
-        <div class="docs-sidebar__title">BNL-OS Titan</div>
-        <a href="#quickstart" class="docs-sidebar__link">Quickstart</a>
-        <a href="#sentinel"   class="docs-sidebar__link">Sentinel Plane</a>
-        <a href="#chronos"    class="docs-sidebar__link">Chronos Timeline</a>
-        <a href="#bsp"        class="docs-sidebar__link">BSP Guide</a>
-      </div>
-      <div class="docs-sidebar__group">
-        <div class="docs-sidebar__title">HackingEdu App</div>
-        <a href="#he-intro"     class="docs-sidebar__link">Introduction</a>
-        <a href="#he-ai-tutor"  class="docs-sidebar__link">AI Tutor Engine</a>
-        <a href="#he-labs"      class="docs-sidebar__link">Lab Orchestration</a>
-        <a href="#he-privacy"   class="docs-sidebar__link">Privacy Stack</a>
-      </div>
-          <div class="docs-sidebar__group">
-            <div class="docs-sidebar__title">Configuration</div>
-            <a href="#local-conf"    class="docs-sidebar__link">local.conf</a>
-            <a href="#images"        class="docs-sidebar__link">Image targets</a>
+            <div class="docs-sidebar__title">BNL-OS Titan</div>
+            <a href="#installation" class="docs-sidebar__link docs-sidebar__link--active">Installation</a>
+            <a href="#sentinel"     class="docs-sidebar__link">Sentinel Plane</a>
+            <a href="#chronos"      class="docs-sidebar__link">Chronos Timeline</a>
+            <a href="#ota"          class="docs-sidebar__link">OTA Updates</a>
           </div>
           <div class="docs-sidebar__group">
-            <div class="docs-sidebar__title">Deployment</div>
-            <a href="#flashing"      class="docs-sidebar__link">Flashing</a>
-            <a href="#ota"           class="docs-sidebar__link">OTA updates</a>
+            <div class="docs-sidebar__title">HackingEdu App</div>
+            <a href="#he-intro"     class="docs-sidebar__link">Introduction</a>
+            <a href="#he-ai-tutor"  class="docs-sidebar__link">AI Tutor Engine</a>
+            <a href="#he-labs"      class="docs-sidebar__link">Lab Orchestration</a>
+            <a href="#he-privacy"   class="docs-sidebar__link">Privacy Stack</a>
+          </div>
+          <div class="docs-sidebar__group">
+            <div class="docs-sidebar__title">Ecosystem</div>
+            <a href="#faq"          class="docs-sidebar__link">FAQ</a>
+            <a href="#license"      class="docs-sidebar__link">Licensing</a>
           </div>
         </nav>
       </aside>
@@ -104,225 +99,94 @@
           <div class="section-label">Overview</div>
           <h1>BNL-OS Documentation</h1>
           <p>
-            BNL-OS is a custom embedded Linux distribution built entirely with the
-            <strong style="color:var(--col-text)">Yocto Project</strong> (Scarthgap / 5.0).
-            It is designed for constrained hardware targets where image size, boot time,
-            and security posture matter.
+            BNL-OS is a professional agentic operating system designed for high-performance security and productivity tasks. 
+            Unlike traditional Linux distributions, BNL-OS is shipped as a <strong>pre-built hardware image</strong> optimized for specific target machines.
           </p>
           <p>
-            This documentation covers everything from setting up a build environment to
-            deploying OTA updates on target hardware.
+            This documentation provides the steps to install BNL-OS, configure its AI features, and manage system updates.
           </p>
 
           <div class="callout callout--info">
             <span class="callout__icon" aria-hidden="true">ℹ️</span>
-            <span>BNL-OS currently targets <strong>ARMv7</strong> and <strong>AArch64</strong> platforms. x86-64 support is experimental.</span>
+            <span>BNL-OS images are cryptographically signed. Always verify the checksum before flashing.</span>
           </div>
         </section>
 
         <hr class="divider" />
 
-        <!-- Requirements -->
-        <section id="requirements">
-          <h2>Requirements</h2>
-          <p>Before building BNL-OS you need the following on your host machine:</p>
+        <!-- Installation -->
+        <section id="installation">
+          <h2>Installation Guide</h2>
+          <p>To use BNL-OS, you do not need to build it from source. Simply download the official image for your hardware and flash it to a bootable drive.</p>
 
-          <h3>Host OS</h3>
-          <p>A 64-bit Linux host is required. The following distributions are tested and supported:</p>
+          <h3>1. Download the Image</h3>
+          <p>Visit the <a href="download.html" style="color:var(--col-accent);">Downloads</a> page and select the version compatible with your hardware (x86-64 or ARM64).</p>
+
+          <h3>2. Prepare the Media</h3>
+          <p>You will need a high-speed USB 3.0 drive or SD Card (minimum 16GB). We recommend using one of the following tools:</p>
           <ul>
-            <li>Ubuntu 22.04 LTS or 24.04 LTS (recommended)</li>
-            <li>Debian 12 (Bookworm)</li>
-            <li>Fedora 39+</li>
+            <li><strong>BalenaEtcher</strong> (Cross-platform, easy to use)</li>
+            <li><strong>Rufus</strong> (Windows only, fast and reliable)</li>
+            <li><strong>dd</strong> (Linux/macOS command line)</li>
           </ul>
 
-          <h3>Hardware</h3>
-          <ul>
-            <li>At least <strong style="color:var(--col-text)">8 GB RAM</strong> (16 GB recommended)</li>
-            <li>At least <strong style="color:var(--col-text)">100 GB free disk space</strong></li>
-            <li>Multi-core CPU (build times scale linearly with core count)</li>
-          </ul>
+          <h3>3. Flash the Image</h3>
+          <p>Select the downloaded <code class="mono">.wic.gz</code> or <code class="mono">.iso</code> file and your target drive in the flashing tool, then click <strong>Flash/Start</strong>.</p>
 
-          <h3>Software</h3>
-          <div class="code-block">
-            <button class="copy-btn" aria-label="Copy package install command">Copy</button>
-            <pre><span class="c-muted"># Ubuntu / Debian</span>
-<span class="c-green">sudo apt update</span> &amp;&amp; <span class="c-green">sudo apt install</span> \
-  git wget curl python3 python3-pip \
-  gawk make gcc g++ diffstat texinfo \
-  chrpath socat libsdl1.2-dev pylint \
-  xterm liblz4-tool zstd</pre>
+          <div class="callout callout--warn">
+            <div class="callout__icon">⚠️</div>
+            <div>Flashing will erase all data on the target drive. Ensure you have backed up any important files.</div>
           </div>
         </section>
 
         <hr class="divider" />
 
-        <!-- Quickstart -->
-        <section id="quickstart">
-          <h2>Quickstart</h2>
-          <p>The fastest way to get a working BNL-OS image running.</p>
+        <!-- BNL-OS Deep Dive (Intro from turn 1) -->
+        <section id="sentinel">
+          <h2>Sentinel Plane</h2>
+          <p>Sentinel is the security heart of BNL-OS. It monitors every system call and network packet using eBPF hooks, providing real-time threat detection and automated rollback capability.</p>
+        </section>
 
-          <h3>1. Clone the repository</h3>
-          <div class="code-block">
-            <button class="copy-btn" aria-label="Copy clone command">Copy</button>
-            <pre><span class="c-green">git clone</span> https://github.com/YOUR_USERNAME/bnl-os.git
-<span class="c-green">cd</span> bnl-os</pre>
-          </div>
-
-          <h3>2. Initialise the build environment</h3>
-          <div class="code-block">
-            <button class="copy-btn" aria-label="Copy source command">Copy</button>
-            <pre><span class="c-green">source</span> oe-init-build-env build</pre>
-          </div>
-
-          <h3>3. Build the full image</h3>
-          <div class="code-block">
-            <button class="copy-btn" aria-label="Copy bitbake command">Copy</button>
-            <pre><span class="c-green">bitbake</span> bnl-image-full</pre>
-          </div>
-
-          <div class="callout callout--tip">
-            <span class="callout__icon" aria-hidden="true">💡</span>
-            <span>Initial builds take 2–4 hours depending on your CPU. Subsequent builds are incremental and much faster thanks to Yocto's shared-state cache.</span>
-          </div>
-
-          <h3>4. Find your image</h3>
-          <div class="code-block">
-            <button class="copy-btn" aria-label="Copy output path">Copy</button>
-            <pre><span class="c-muted"># Output images are in:</span>
-build/tmp/deploy/images/<span class="c-yellow">MACHINE</span>/bnl-image-full-<span class="c-yellow">MACHINE</span>.wic.gz</pre>
-          </div>
+        <section id="chronos">
+          <h2>Chronos Timeline</h2>
+          <p>The Chronos interface replaces the traditional desktop. It visualizes your system state as a timeline, allowing you to instantly revert to previous snapshots or plan future automated tasks.</p>
         </section>
 
         <hr class="divider" />
 
-        <!-- Build setup -->
+        <!-- HackingEdu Intro -->
         <section id="he-intro">
-        <h2>HackingEdu Introduction</h2>
-        <p>BNL HackingEdu is a security orchestration and education platform designed to provide a safe, AI-assisted environment for learning offensive and defensive cybersecurity.</p>
-        <div class="callout callout--tip">
-          <div class="callout__icon">💡</div>
-          <div>HackingEdu integrates directly with BNL-OS for advanced lab orchestration, but it can also run as a standalone Electron app on Windows and Linux.</div>
-        </div>
-      </section>
-
-      <section id="he-ai-tutor">
-        <h3>AI Tutor Engine</h3>
-        <p>The AI Tutor is an always-on assistant that helps you navigate complex labs. It uses a "Second Brain" architecture to remember your progress and provide contextual hints.</p>
-        <div class="code-block">
-          <pre><span class="c-muted">// AI context injection example</span>
-<span class="c-accent">window.api.ai.chat</span>({
-  prompt: "How do I bypass this WAF?",
-  context: "CTF_CHALLENGE_04"
-});</pre>
-        </div>
-      </section>
-
-      <section id="he-labs">
-        <h3>Lab Orchestration</h3>
-        <p>HackingEdu uses a sophisticated Lab Runtime that coordinates between local Docker containers and external training ranges. It handles target lifecycle, flag validation, and evidence persistence.</p>
-      </section>
-
-      <section id="he-privacy">
-        <h3>Privacy Stack</h3>
-        <p>Security research requires anonymity. HackingEdu includes a built-in privacy stack that handles WireGuard tunnels, Cloudflare WARP rotation, and DNS leak prevention automatically.</p>
-      </section>
-        
-        <h2>Build setup</h2>
-        <p>
-            BNL-OS uses a <code class="mono">kas</code> configuration file for reproducible
-            layer management. This is the recommended approach over manually editing
-            <code class="mono">bblayers.conf</code>.
-          </p>
-          <div class="code-block">
-            <button class="copy-btn" aria-label="Copy kas install command">Copy</button>
-            <pre><span class="c-muted"># Install kas</span>
-<span class="c-green">pip3 install</span> kas
-
-<span class="c-muted"># Build using kas (handles layer cloning automatically)</span>
-<span class="c-green">kas build</span> kas/bnl-os.yml</pre>
+          <h2>HackingEdu Introduction</h2>
+          <p>BNL HackingEdu is a security orchestration and education platform designed to provide a safe, AI-assisted environment for learning offensive and defensive cybersecurity.</p>
+          <div class="callout callout--tip">
+            <div class="callout__icon">💡</div>
+            <div>HackingEdu integrates directly with BNL-OS for advanced lab orchestration, but it can also run as a standalone Electron app on Windows and Linux.</div>
           </div>
         </section>
 
-        <hr class="divider" />
+        <section id="he-ai-tutor">
+          <h3>AI Tutor Engine</h3>
+          <p>The AI Tutor is an always-on assistant that helps you navigate complex labs. It uses a "Second Brain" architecture to remember your progress and provide contextual hints.</p>
+        </section>
 
-        <!-- Layers -->
-        <section id="layers">
-          <h2>Layers</h2>
-          <p>BNL-OS is composed of the following Yocto layers:</p>
+        <section id="he-labs">
+          <h3>Lab Orchestration</h3>
+          <p>HackingEdu handles target lifecycle, flag validation, and evidence persistence through its integrated lab runtime.</p>
+        </section>
 
-          <table style="width:100%; border-collapse:collapse; font-size:0.875rem; margin-bottom:var(--s5);">
-            <thead>
-              <tr style="border-bottom:1px solid var(--col-border);">
-                <th style="text-align:left; padding:10px 12px; color:var(--col-muted); font-family:var(--font-mono); font-weight:400; font-size:0.75rem; letter-spacing:0.05em;">LAYER</th>
-                <th style="text-align:left; padding:10px 12px; color:var(--col-muted); font-family:var(--font-mono); font-weight:400; font-size:0.75rem; letter-spacing:0.05em;">PURPOSE</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr style="border-bottom:1px solid var(--col-border);">
-                <td style="padding:10px 12px;"><code class="mono" style="color:var(--col-accent);">meta-bnl</code></td>
-                <td style="padding:10px 12px; color:var(--col-muted);">BNL-OS distro policy, image recipes, and custom configurations</td>
-              </tr>
-              <tr style="border-bottom:1px solid var(--col-border);">
-                <td style="padding:10px 12px;"><code class="mono" style="color:var(--col-blue);">meta-bnl-bsp</code></td>
-                <td style="padding:10px 12px; color:var(--col-muted);">Board Support Packages for supported hardware targets</td>
-              </tr>
-              <tr style="border-bottom:1px solid var(--col-border);">
-                <td style="padding:10px 12px;"><code class="mono" style="color:var(--col-muted);">meta-openembedded</code></td>
-                <td style="padding:10px 12px; color:var(--col-muted);">Extended OpenEmbedded package collection</td>
-              </tr>
-              <tr>
-                <td style="padding:10px 12px;"><code class="mono" style="color:var(--col-muted);">poky</code></td>
-                <td style="padding:10px 12px; color:var(--col-muted);">Yocto Project reference distro (upstream)</td>
-              </tr>
-            </tbody>
-          </table>
+        <section id="he-privacy">
+          <h3>Privacy Stack</h3>
+          <p>Built-in privacy protection including WireGuard tunnels and Cloudflare WARP rotation.</p>
         </section>
 
         <hr class="divider" />
 
-        <!-- BSP -->
-        <section id="bsp">
-          <h2>BSP Guide</h2>
+        <!-- OTA -->
+        <section id="ota">
+          <h2>OTA Updates</h2>
           <p>
-            The <code class="mono">meta-bnl-bsp</code> layer contains machine configurations
-            for supported hardware targets. To add a new machine, create a
-            <code class="mono">.conf</code> file under
-            <code class="mono">meta-bnl-bsp/conf/machine/</code>.
+            BNL-OS uses an A/B partition layout. Updates are downloaded in the background and applied to the inactive slot. On reboot, the system automatically switches to the updated version.
           </p>
-          <div class="code-block">
-            <button class="copy-btn" aria-label="Copy machine config example">Copy</button>
-            <pre><span class="c-muted"># meta-bnl-bsp/conf/machine/bnl-rpi4.conf</span>
-<span class="c-green">require</span> conf/machine/include/rpi-base.inc
-
-<span class="c-yellow">MACHINE_FEATURES</span> += <span class="c-accent">"wifi bluetooth"</span>
-<span class="c-yellow">KERNEL_DEVICETREE</span>  = <span class="c-accent">"broadcom/bcm2711-rpi-4-b.dtb"</span>
-<span class="c-yellow">UBOOT_MACHINE</span>      = <span class="c-accent">"rpi_4_defconfig"</span>
-<span class="c-yellow">PREFERRED_PROVIDER_virtual/kernel</span> = <span class="c-accent">"linux-bnl"</span></pre>
-          </div>
-        </section>
-
-        <hr class="divider" />
-
-        <!-- local.conf -->
-        <section id="local-conf">
-          <h2>local.conf</h2>
-          <p>Key variables to set in <code class="mono">build/conf/local.conf</code>:</p>
-          <div class="code-block">
-            <button class="copy-btn" aria-label="Copy local.conf example">Copy</button>
-            <pre><span class="c-muted"># Target machine</span>
-<span class="c-yellow">MACHINE</span> = <span class="c-accent">"bnl-rpi4"</span>
-
-<span class="c-muted"># Parallel build threads (set to your CPU core count)</span>
-<span class="c-yellow">BB_NUMBER_THREADS</span> = <span class="c-accent">"8"</span>
-<span class="c-yellow">PARALLEL_MAKE</span>    = <span class="c-accent">"-j8"</span>
-
-<span class="c-muted"># Shared state and download directories (speeds up rebuilds)</span>
-<span class="c-yellow">SSTATE_DIR</span>  = <span class="c-accent">"/opt/yocto/sstate-cache"</span>
-<span class="c-yellow">DL_DIR</span>      = <span class="c-accent">"/opt/yocto/downloads"</span>
-
-<span class="c-muted"># Enable read-only rootfs</span>
-<span class="c-yellow">EXTRA_IMAGE_FEATURES</span> += <span class="c-accent">"read-only-rootfs"</span></pre>
-          </div>
         </section>
 
         <hr class="divider" />

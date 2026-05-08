@@ -87,30 +87,28 @@
       <div class="setup-section setup-section--os reveal">
         <div class="setup-header">
           <h2 class="setup-title">BNL-OS Titan</h2>
-          <span class="setup-badge">Yocto Project • Linux/WSL2</span>
+          <span class="setup-badge">Hardware Image • Flashable Media</span>
         </div>
         
         <div class="step">
-          <div class="step-title" data-step="1">Host Preparation</div>
-          <p class="mb-sm">Install Yocto dependencies on Ubuntu/WSL2:</p>
-          <div class="code-snippet">sudo apt install gawk wget git diffstat unzip texinfo gcc build-essential chrpath socat cpio python3 python3-pip python3-pexpect xz-utils debianutils iputils-ping python3-git python3-jinja2 python3-subunit zstd liblz4-tool file locales libacl1</div>
+          <div class="step-title" data-step="1">Download Image</div>
+          <p class="mb-sm">Get the official BNL-OS Titan image for your hardware from the downloads portal:</p>
+          <a href="download.html" class="btn btn--sm btn--primary mb-md">Go to Downloads</a>
         </div>
 
         <div class="step">
-          <div class="step-title" data-step="2">Initialize Environment</div>
-          <p class="mb-sm">Source the build environment script:</p>
-          <div class="code-snippet">source poky/oe-init-build-env build-bnl</div>
+          <div class="step-title" data-step="2">Select Flashing Tool</div>
+          <p class="mb-sm">We recommend using <strong>BalenaEtcher</strong> or <strong>Rufus</strong> to prepare your bootable media.</p>
         </div>
 
         <div class="step">
-          <div class="step-title" data-step="3">Start the Build</div>
-          <p class="mb-sm">Run BitBake to generate the desktop image:</p>
-          <div class="code-snippet">bitbake bnl-os-desktop</div>
+          <div class="step-title" data-step="3">Flash & Boot</div>
+          <p class="mb-sm">Connect your USB drive, select the image, and hit start. Once finished, boot your target hardware from the USB.</p>
         </div>
         
-        <div class="callout callout--warn">
-          <div class="callout__icon">⚠️</div>
-          <div>Initial build can take several hours and requires ~100GB of disk space.</div>
+        <div class="callout callout--tip">
+          <div class="callout__icon">💡</div>
+          <div>For industrial deployments, you can use the command-line <code class="mono">bmaptool</code> for significantly faster flashing speeds.</div>
         </div>
       </div>
 
