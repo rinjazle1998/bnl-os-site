@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Setup Guide — BNL Ecosystem</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .setup-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--s8);
+      margin-top: var(--s7);
+    }
+    .setup-section {
+      background: var(--col-surface);
+      border: 1px solid var(--col-border);
+      border-radius: var(--r-xl);
+      padding: var(--s7);
+      position: relative;
+      overflow: hidden;
+    }
+    .setup-section::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 4px;
+    }
+    .setup-section--os::before { background: var(--col-accent); }
+    .setup-section--he::before { background: var(--col-he-cyan); }
+    
+    .setup-header { margin-bottom: var(--s5); }
+    .setup-title { font-size: 1.8rem; margin-bottom: var(--s2); }
+    .setup-badge { font-family: var(--font-mono); font-size: 0.7rem; color: var(--col-yellow); }
+
+    .step { margin-bottom: var(--s6); }
+    .step-title { font-family: var(--font-mono); font-size: 0.9rem; color: var(--col-text); margin-bottom: var(--s3); display: flex; align-items: center; gap: 10px; }
+    .step-title::before {
+      content: attr(data-step);
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem;
+    }
+
+    .code-snippet {
+      background: #000;
+      padding: var(--s4);
+      border-radius: var(--r-md);
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--col-he-cyan);
+      overflow-x: auto;
+      margin-bottom: var(--s3);
+      border: 1px solid var(--col-border);
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo">
+      <span class="nav__logo-text">BNL<span class="nav__logo-accent"> Ecosystem</span></span>
+    </a>
+    <ul class="nav__links">
+      <li><a href="index.html" class="nav__link">Home</a></li>
+      <li><a href="hacking-edu.html" class="nav__link">HackingEdu</a></li>
+      <li><a href="setup.html" class="nav__link nav__link--active">Setup</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="section">
+  <div class="container">
+    <header class="section-header section-header--center reveal">
+      <div class="section-label">Getting Started</div>
+      <h1 class="section-title">Prepare Your Environment.</h1>
+      <p class="section-sub">Both BNL-OS and BNL HackingEdu are currently in active development. Follow these steps to set up the developer environment.</p>
+    </header>
+
+    <div class="setup-grid">
+      <!-- BNL-OS SETUP -->
+      <div class="setup-section setup-section--os reveal">
+        <div class="setup-header">
+          <h2 class="setup-title">BNL-OS Titan</h2>
+          <span class="setup-badge">Yocto Project • Linux/WSL2</span>
+        </div>
+        
+        <div class="step">
+          <div class="step-title" data-step="1">Host Preparation</div>
+          <p class="mb-sm">Install Yocto dependencies on Ubuntu/WSL2:</p>
+          <div class="code-snippet">sudo apt install gawk wget git diffstat unzip texinfo gcc build-essential chrpath socat cpio python3 python3-pip python3-pexpect xz-utils debianutils iputils-ping python3-git python3-jinja2 python3-subunit zstd liblz4-tool file locales libacl1</div>
+        </div>
+
+        <div class="step">
+          <div class="step-title" data-step="2">Initialize Environment</div>
+          <p class="mb-sm">Source the build environment script:</p>
+          <div class="code-snippet">source poky/oe-init-build-env build-bnl</div>
+        </div>
+
+        <div class="step">
+          <div class="step-title" data-step="3">Start the Build</div>
+          <p class="mb-sm">Run BitBake to generate the desktop image:</p>
+          <div class="code-snippet">bitbake bnl-os-desktop</div>
+        </div>
+        
+        <div class="callout callout--warn">
+          <div class="callout__icon">⚠️</div>
+          <div>Initial build can take several hours and requires ~100GB of disk space.</div>
+        </div>
+      </div>
+
+      <!-- HACKINGEDU SETUP -->
+      <div class="setup-section setup-section--he reveal" style="animation-delay: 0.2s">
+        <div class="setup-header">
+          <h2 class="setup-title">HackingEdu App</h2>
+          <span class="setup-badge">Electron • Node.js • Docker</span>
+        </div>
+
+        <div class="step">
+          <div class="step-title" data-step="1">Prerequisites</div>
+          <p class="mb-sm">Ensure you have the following installed:</p>
+          <ul class="mb-md">
+            <li>• Node.js 20+</li>
+            <li>• Docker Desktop</li>
+            <li>• Python 3.10+</li>
+            <li>• Nmap & Wireshark</li>
+          </ul>
+        </div>
+
+        <div class="step">
+          <div class="step-title" data-step="2">Install Dependencies</div>
+          <p class="mb-sm">Run npm install in the project root:</p>
+          <div class="code-snippet">npm install</div>
+        </div>
+
+        <div class="step">
+          <div class="step-title" data-step="3">Launch Dev Server</div>
+          <p class="mb-sm">Start the application in development mode:</p>
+          <div class="code-snippet">npm run dev</div>
+        </div>
+
+        <div class="callout callout--tip">
+          <div class="callout__icon">💡</div>
+          <div>The app will automatically detect missing tools and offer to install them via the built-in Installer Engine.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section--sm">
+  <div class="container">
+    <div class="cta-block reveal">
+      <h2>Encountering issues?</h2>
+      <p>Check the detailed documentation for troubleshooting and architecture deep-dives.</p>
+      <a href="docs.html" class="btn btn--outline">Read Documentation</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__bottom">
+      <span class="footer__copy">© 2026 BNL Project.</span>
+      <span class="footer__yocto" style="color: var(--col-yellow)">Experimental Branch</span>
+    </div>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

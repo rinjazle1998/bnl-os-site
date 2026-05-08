@@ -40,12 +40,11 @@
     </a>
     <ul class="nav__links" role="list">
       <li><a href="index.html"     class="nav__link">Home</a></li>
-      <li><a href="download.html"  class="nav__link">Download</a></li>
-      <li><a href="docs.html"      class="nav__link">Docs</a></li>
-      <li><a href="changelog.html" class="nav__link">Changelog</a></li>
-      <li><a href="blog.html"      class="nav__link">Blog</a></li>
+      <li><a href="hacking-edu.html" class="nav__link">HackingEdu</a></li>
+      <li><a href="setup.html"     class="nav__link">Setup</a></li>
+      <li><a href="docs.html"      class="nav__link nav__link--active">Docs</a></li>
     </ul>
-    <a href="download.html" class="btn btn--primary btn--sm nav__cta">Download</a>
+    <a href="setup.html" class="btn btn--primary btn--sm nav__cta">Get Started</a>
     <button class="nav__hamburger" id="nav-hamburger" aria-controls="nav-drawer" aria-expanded="false" aria-label="Open navigation menu">
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
@@ -71,17 +70,19 @@
       <aside class="docs-sidebar" aria-label="Documentation navigation">
         <nav>
           <div class="docs-sidebar__group">
-            <div class="docs-sidebar__title">Getting started</div>
-            <a href="#introduction"  class="docs-sidebar__link">Introduction</a>
-            <a href="#requirements"  class="docs-sidebar__link">Requirements</a>
-            <a href="#quickstart"    class="docs-sidebar__link">Quickstart</a>
-          </div>
-          <div class="docs-sidebar__group">
-            <div class="docs-sidebar__title">Building</div>
-            <a href="#build-setup"   class="docs-sidebar__link">Build setup</a>
-            <a href="#layers"        class="docs-sidebar__link">Layers</a>
-            <a href="#bsp"           class="docs-sidebar__link">BSP guide</a>
-          </div>
+        <div class="docs-sidebar__title">BNL-OS Titan</div>
+        <a href="#quickstart" class="docs-sidebar__link">Quickstart</a>
+        <a href="#sentinel"   class="docs-sidebar__link">Sentinel Plane</a>
+        <a href="#chronos"    class="docs-sidebar__link">Chronos Timeline</a>
+        <a href="#bsp"        class="docs-sidebar__link">BSP Guide</a>
+      </div>
+      <div class="docs-sidebar__group">
+        <div class="docs-sidebar__title">HackingEdu App</div>
+        <a href="#he-intro"     class="docs-sidebar__link">Introduction</a>
+        <a href="#he-ai-tutor"  class="docs-sidebar__link">AI Tutor Engine</a>
+        <a href="#he-labs"      class="docs-sidebar__link">Lab Orchestration</a>
+        <a href="#he-privacy"   class="docs-sidebar__link">Privacy Stack</a>
+      </div>
           <div class="docs-sidebar__group">
             <div class="docs-sidebar__title">Configuration</div>
             <a href="#local-conf"    class="docs-sidebar__link">local.conf</a>
@@ -195,9 +196,39 @@ build/tmp/deploy/images/<span class="c-yellow">MACHINE</span>/bnl-image-full-<sp
         <hr class="divider" />
 
         <!-- Build setup -->
-        <section id="build-setup">
-          <h2>Build setup</h2>
-          <p>
+        <section id="he-intro">
+        <h2>HackingEdu Introduction</h2>
+        <p>BNL HackingEdu is a security orchestration and education platform designed to provide a safe, AI-assisted environment for learning offensive and defensive cybersecurity.</p>
+        <div class="callout callout--tip">
+          <div class="callout__icon">💡</div>
+          <div>HackingEdu integrates directly with BNL-OS for advanced lab orchestration, but it can also run as a standalone Electron app on Windows and Linux.</div>
+        </div>
+      </section>
+
+      <section id="he-ai-tutor">
+        <h3>AI Tutor Engine</h3>
+        <p>The AI Tutor is an always-on assistant that helps you navigate complex labs. It uses a "Second Brain" architecture to remember your progress and provide contextual hints.</p>
+        <div class="code-block">
+          <pre><span class="c-muted">// AI context injection example</span>
+<span class="c-accent">window.api.ai.chat</span>({
+  prompt: "How do I bypass this WAF?",
+  context: "CTF_CHALLENGE_04"
+});</pre>
+        </div>
+      </section>
+
+      <section id="he-labs">
+        <h3>Lab Orchestration</h3>
+        <p>HackingEdu uses a sophisticated Lab Runtime that coordinates between local Docker containers and external training ranges. It handles target lifecycle, flag validation, and evidence persistence.</p>
+      </section>
+
+      <section id="he-privacy">
+        <h3>Privacy Stack</h3>
+        <p>Security research requires anonymity. HackingEdu includes a built-in privacy stack that handles WireGuard tunnels, Cloudflare WARP rotation, and DNS leak prevention automatically.</p>
+      </section>
+        
+        <h2>Build setup</h2>
+        <p>
             BNL-OS uses a <code class="mono">kas</code> configuration file for reproducible
             layer management. This is the recommended approach over manually editing
             <code class="mono">bblayers.conf</code>.

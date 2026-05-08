@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BNL HackingEdu — AI-Powered Security Academy</title>
+  <meta name="description" content="BNL HackingEdu is a comprehensive security education platform with AI-driven lab orchestration and privacy-first design." />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    :root {
+      --col-accent: var(--col-he-cyan);
+      --col-accent-glow: var(--col-he-glow);
+    }
+    .he-hero {
+      padding-top: 140px;
+      padding-bottom: 80px;
+      background: radial-gradient(circle at 70% 30%, rgba(0, 102, 255, 0.08), transparent 50%);
+    }
+    .he-hero__img-container {
+      position: relative;
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      border: 1px solid var(--col-border-hi);
+      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
+    }
+    .he-hero__img {
+      width: 100%;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    .he-hero__img-container:hover .he-hero__img {
+      transform: scale(1.02);
+    }
+    .feature-grid--he {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .he-card {
+      background: var(--col-he-surface);
+      border: 1px solid var(--col-border);
+      border-radius: var(--r-lg);
+      padding: var(--s6);
+      transition: all var(--t-normal);
+    }
+    .he-card:hover {
+      border-color: var(--col-he-cyan);
+      box-shadow: 0 20px 50px rgba(0, 245, 255, 0.05);
+      transform: translateY(-5px);
+    }
+    .he-card__icon {
+      font-size: 2rem;
+      margin-bottom: var(--s4);
+      color: var(--col-he-cyan);
+    }
+    .step-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--s5);
+      margin-top: var(--s6);
+    }
+    .step-item {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: var(--s4);
+    }
+    .step-num {
+      width: 48px; height: 48px;
+      background: var(--col-he-cyan);
+      color: #000;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.2rem;
+    }
+    .wip-overlay {
+      position: absolute;
+      top: 20px; right: 20px;
+      background: rgba(245, 197, 66, 0.9);
+      color: #000;
+      padding: 6px 14px;
+      border-radius: 100px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      z-index: 10;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav" role="navigation">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo">
+      <svg class="nav__logo-svg" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="16,1 29,8.5 29,23.5 16,31 3,23.5 3,8.5" fill="none" stroke="#00f5ff" stroke-width="1.4" opacity="0.5"/>
+        <rect x="9" y="9" width="14" height="14" rx="2.5" fill="#00f5ff" opacity="0.12"/>
+        <rect x="9" y="9" width="14" height="14" rx="2.5" fill="none" stroke="#00f5ff" stroke-width="1.4"/>
+        <circle cx="16" cy="16" r="2.2" fill="#00f5ff"/>
+      </svg>
+      <span class="nav__logo-text">BNL<span class="nav__logo-accent"> HackingEdu</span></span>
+    </a>
+    <ul class="nav__links">
+      <li><a href="index.html" class="nav__link">Home</a></li>
+      <li><a href="hacking-edu.html" class="nav__link nav__link--active">HackingEdu</a></li>
+      <li><a href="setup.html" class="nav__link">Setup</a></li>
+      <li><a href="docs.html" class="nav__link">Docs</a></li>
+    </ul>
+    <a href="setup.html" class="btn btn--primary btn--sm nav__cta">Get Started</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="he-hero">
+  <div class="container">
+    <div class="hero__content">
+      <div class="hero__left reveal">
+        <div class="badge badge--accent mb-md">
+          <span class="badge-dot"></span>
+          Alpha Version 0.8.0 — In Active Development
+        </div>
+        <h1 class="hero__title">
+          The Future of <br>
+          <span class="he-gradient-text">Cyber Defense.</span>
+        </h1>
+        <p class="hero__desc">
+          BNL HackingEdu is not just an academy. It's a next-generation laboratory orchestration platform 
+          powered by agentic AI, designed to bridge the gap between theory and real-world exploitation.
+        </p>
+        <div class="hero__actions">
+          <a href="setup.html" class="btn btn--primary btn--lg">Start Learning</a>
+          <a href="#features" class="btn btn--ghost btn--lg">Explore Features</a>
+        </div>
+      </div>
+      <div class="hero__right reveal" style="animation-delay: 0.2s">
+        <div class="he-hero__img-container floating">
+          <div class="wip-overlay">UNFINISHED</div>
+          <img src="assets/hacking-edu-hero.png" alt="BNL HackingEdu Dashboard" class="he-hero__img">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CORE PILLARS -->
+<section id="features" class="section">
+  <div class="container">
+    <header class="section-header section-header--center">
+      <div class="section-label">Core Pillars</div>
+      <h2 class="section-title">Beyond Traditional <br>Security Education.</h2>
+    </header>
+    <div class="features-grid feature-grid--he">
+      <div class="he-card reveal">
+        <div class="he-card__icon">🤖</div>
+        <h3>The AI Tutor</h3>
+        <p>An always-on assistant that understands your current lab context. It doesn't just give answers—it guides your reasoning, provides hints, and identifies your skill gaps in real-time.</p>
+      </div>
+      <div class="he-card reveal" style="animation-delay: 0.1s">
+        <div class="he-card__icon">🕸️</div>
+        <h3>Lab Orchestration</h3>
+        <p>Deploy complex attack/defense scenarios with a single click. Our engine handles Docker networks, vulnerable VMs, and target instantiation so you can focus on the mission.</p>
+      </div>
+      <div class="he-card reveal" style="animation-delay: 0.2s">
+        <div class="he-card__icon">🛡️</div>
+        <h3>Privacy Stack</h3>
+        <p>Built-in 4-layer privacy protection. Automatic WireGuard/WARP rotation, DNS leak protection, and identity isolation for safe, authorized security research.</p>
+      </div>
+      <div class="he-card reveal" style="animation-delay: 0.3s">
+        <div class="he-card__icon">📊</div>
+        <h3>Skill Graph</h3>
+        <p>Track your progress across 10+ specialized tracks from Programming and AI Engineering to Zero-Day Research and Social Engineering Defense.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SETUP TEASER -->
+<section class="section--sm">
+  <div class="container">
+    <div class="cta-block reveal">
+      <h2 class="he-gradient-text">Ready to dive in?</h2>
+      <p>Follow our comprehensive setup guide to prepare your environment for the BNL HackingEdu experience.</p>
+      <div class="cta-block__actions">
+        <a href="setup.html" class="btn btn--primary btn--lg">View Setup Guide</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <span class="nav__logo-text">BNL<span class="nav__logo-accent"> HackingEdu</span></span>
+        <p>Powered by Bac Nghi Le + Codex. A next-gen security education platform.</p>
+      </div>
+      <div class="footer__col">
+        <div class="footer__col-title">Product</div>
+        <a href="setup.html">Setup</a>
+        <a href="docs.html">Documentation</a>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span class="footer__copy">© 2026 BNL Project. Released under Developer License.</span>
+      <span class="footer__yocto" style="color: var(--col-yellow)">Work in Progress</span>
+    </div>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

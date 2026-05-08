@@ -119,13 +119,12 @@
       <span class="nav__logo-text">BNL<span class="nav__logo-accent">-OS</span></span>
     </a>
     <ul class="nav__links" role="list">
-      <li><a href="index.html"     class="nav__link">Home</a></li>
-      <li><a href="download.html"  class="nav__link">Download</a></li>
+      <li><a href="index.html"     class="nav__link nav__link--active">Home</a></li>
+      <li><a href="hacking-edu.html" class="nav__link">HackingEdu</a></li>
+      <li><a href="setup.html"     class="nav__link">Setup</a></li>
       <li><a href="docs.html"      class="nav__link">Docs</a></li>
-      <li><a href="changelog.html" class="nav__link">Changelog</a></li>
-      <li><a href="blog.html"      class="nav__link">Blog</a></li>
     </ul>
-    <a href="download.html" class="btn btn--primary btn--sm nav__cta">Release status</a>
+    <a href="setup.html" class="btn btn--primary btn--sm nav__cta">Get Started</a>
     <button class="nav__hamburger" id="nav-hamburger" aria-controls="nav-drawer" aria-expanded="false" aria-label="Open navigation menu">
       <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
     </button>
@@ -144,107 +143,114 @@
 <section class="hero">
   <div class="hero__glow" aria-hidden="true"></div>
   <div class="container">
-    <div class="hero__content">
-
-      <div class="hero__left">
-        <div class="badge hero__badge anim-fade-up" style="--delay:0.05s; background:rgba(245,197,66,0.1); border:1px solid rgba(245,197,66,0.28); color:var(--col-yellow);">
-          <span class="badge-dot" aria-hidden="true" style="background:var(--col-yellow);"></span>
-          In active development — no release yet
+    <div class="hero__content" style="grid-template-columns: 1fr;">
+      <div class="text-center reveal">
+        <div class="badge badge--accent mb-md">
+          <span class="badge-dot" style="background:var(--col-yellow);"></span>
+          Unified Ecosystem — Active Development
         </div>
-
-        <h1 class="hero__title anim-fade-up" style="--delay:0.15s">
-          Embedded Linux.<br>
-          <span class="gradient-text">Purpose-built.</span>
+        <h1 class="hero__title">
+          The Next Evolution of <br>
+          <span class="gradient-text">Human-AI Symbiosis.</span>
         </h1>
+        <p class="hero__desc" style="margin-inline: auto; max-width: 60ch;">
+          Welcome to the BNL Ecosystem. We are building a unified future where operating systems and 
+          educational platforms are driven by Agentic AI.
+        </p>
+      </div>
+    </div>
 
-        <p class="hero__desc anim-fade-up" style="--delay:0.25s">
-          BNL-OS is a custom embedded Linux distribution being built from the ground up
-          with the Yocto Project — minimal, security-hardened, and designed
-          for production target hardware.
+    <!-- Dual Selection -->
+    <div class="setup-grid reveal" style="animation-delay: 0.2s">
+      <a href="#bnl-os-detail" class="dl-card dl-card--featured" style="text-decoration: none; cursor: pointer;">
+        <div class="dl-card__header">
+          <span class="dl-card__title" style="font-size: 1.5rem;">BNL-OS Titan</span>
+          <span class="badge badge--accent">AGENTIC OS</span>
+        </div>
+        <p class="dl-card__desc">A custom Yocto-based Linux distribution where AI is the core, not an add-on. Featuring the Chronos Timeline and Sentinel Plane.</p>
+        <span class="btn btn--primary btn--sm" style="width: fit-content;">Learn More ↓</span>
+      </a>
+      <a href="hacking-edu.html" class="dl-card" style="text-decoration: none; cursor: pointer; border-color: var(--col-he-cyan);">
+        <div class="dl-card__header">
+          <span class="dl-card__title" style="font-size: 1.5rem; color: var(--col-he-cyan);">HackingEdu App</span>
+          <span class="badge" style="background: var(--col-he-glow); color: var(--col-he-cyan); border-color: var(--col-he-cyan);">SECURITY ACADEMY</span>
+        </div>
+        <p class="dl-card__desc">An AI-powered security education platform with automated lab orchestration and built-in privacy protection.</p>
+        <span class="btn btn--ghost btn--sm" style="width: fit-content; border-color: var(--col-he-cyan); color: var(--col-he-cyan);">Enter Branch →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- BNL-OS DEEP DIVE -->
+<section id="bnl-os-detail" class="section">
+  <div class="container">
+    <div class="hero__content" style="align-items: flex-start;">
+      <div class="hero__left reveal">
+        <div class="section-label">BNL-OS Titan Edition</div>
+        <h2 class="section-title">A Brain for Your Machine.</h2>
+        <p class="section-sub mb-lg">
+          BNL-OS is built on the Yocto Project, but its soul lies in its AI layers. 
+          We've moved beyond the traditional desktop metaphor into a narrative, event-driven experience.
         </p>
 
-        <div class="hero__actions anim-fade-up" style="--delay:0.35s">
-          <a href="download.html" class="btn btn--ghost btn--lg">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            Release status
-          </a>
-          <a href="docs.html" class="btn btn--ghost btn--lg">Read the docs →</a>
-        </div>
-
-        <div class="hero__meta anim-fade-up" style="--delay:0.45s">
-          <span class="hero__meta-item">Kernel 6.6 LTS</span>
-          <span class="hero__meta-sep" aria-hidden="true">·</span>
-          <span class="hero__meta-item">Yocto Scarthgap</span>
-          <span class="hero__meta-sep" aria-hidden="true">·</span>
-          <span class="hero__meta-item">MIT License</span>
+        <div class="step-list">
+          <div class="he-card mb-md reveal" style="background: rgba(10, 20, 33, 0.5);">
+            <h3 style="color: var(--col-accent);">01. Sentinel Plane (The Immune System)</h3>
+            <p>A deterministic rule engine paired with AI analyzers. Sentinel monitors kernel hooks via eBPF and ensures every action is safe before it happens. Rollback is just a Btrfs snapshot away.</p>
+          </div>
+          <div class="he-card mb-md reveal" style="background: rgba(10, 20, 33, 0.5); animation-delay: 0.1s">
+            <h3 style="color: var(--col-yellow);">02. Chronos Timeline (The Narrative OS)</h3>
+            <p>Forget the file system. In BNL-OS, everything is an event. The Chronos Bar allows you to travel through the past (snapshots), manage the present (agents), and plan the future (intents).</p>
+          </div>
+          <div class="he-card mb-md reveal" style="background: rgba(10, 20, 33, 0.5); animation-delay: 0.2s">
+            <h3 style="color: var(--col-blue);">03. Titan Council (The Negotiation Plane)</h3>
+            <p>A multi-agent system where specialized AI models negotiate resource allocation and task execution in the background, ensuring your system is always optimized without you lifting a finger.</p>
+          </div>
         </div>
       </div>
-
-      <!-- Right: real build status, not fake terminal -->
-      <div class="hero__right anim-fade-up" style="--delay:0.3s">
-        <div class="status-card">
-          <div class="status-card__head">Build progress — v1.0.0</div>
+      <div class="hero__right reveal" style="animation-delay: 0.3s">
+        <div class="he-hero__img-container floating" style="border-color: var(--col-accent);">
+          <div class="wip-overlay" style="background: var(--col-accent);">v1.0.0 TITAN</div>
+          <img src="assets/bnl-os-titan-hero.png" alt="BNL-OS Titan Interface" class="he-hero__img">
+        </div>
+        <div class="status-card mt-lg">
+          <div class="status-card__head">Build Status — Unfinished</div>
           <div class="status-card__body">
             <div class="status-row">
-              <span class="status-row__label">Yocto layer setup</span>
-              <span class="s-pill s-pill--done"><span class="s-pill__dot" aria-hidden="true"></span>Done</span>
+              <span class="status-row__label">Sentinel AI Engine</span>
+              <span class="s-pill s-pill--wip"><span class="s-pill__dot"></span>WIP</span>
             </div>
             <div class="status-row">
-              <span class="status-row__label">Kernel configuration</span>
-              <span class="s-pill s-pill--done"><span class="s-pill__dot" aria-hidden="true"></span>Done</span>
-            </div>
-            <div class="status-row">
-              <span class="status-row__label">BSP (Board Support Package)</span>
-              <span class="s-pill s-pill--wip"><span class="s-pill__dot" aria-hidden="true"></span>In progress</span>
-            </div>
-            <div class="status-row">
-              <span class="status-row__label">Full image build</span>
-              <span class="s-pill s-pill--wip"><span class="s-pill__dot" aria-hidden="true"></span>In progress</span>
-            </div>
-            <div class="status-row">
-              <span class="status-row__label">Hardware testing</span>
-              <span class="s-pill s-pill--todo"><span class="s-pill__dot" aria-hidden="true"></span>Pending</span>
-            </div>
-            <div class="status-row">
-              <span class="status-row__label">Public release</span>
-              <span class="s-pill s-pill--todo"><span class="s-pill__dot" aria-hidden="true"></span>Pending</span>
-            </div>
-          </div>
-          <div class="status-card__footer">
-            <div class="progress-header">
-              <span>Overall progress</span>
-              <span class="progress-pct">~55%</span>
-            </div>
-            <div class="progress-track" role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100" aria-label="Build progress 55 percent">
-              <div class="progress-track__fill"></div>
+              <span class="status-row__label">Chronos Timeline UI</span>
+              <span class="s-pill s-pill--wip"><span class="s-pill__dot"></span>WIP</span>
             </div>
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
 <!-- STATS -->
-<div class="stats-bar">
+<div class="stats-bar reveal">
   <div class="container">
     <div class="stats-bar__grid">
-      <div class="stat" data-animate>
+      <div class="stat">
         <div class="stat__num">6<span class="accent">.6</span></div>
-        <div class="stat__label">Linux kernel LTS</div>
+        <div class="stat__label">Kernel LTS</div>
       </div>
-      <div class="stat" data-animate>
-        <div class="stat__num">Yocto</div>
-        <div class="stat__label">Scarthgap (5.0)</div>
+      <div class="stat">
+        <div class="stat__num">AI<span class="accent">-Native</span></div>
+        <div class="stat__label">Agentic Core</div>
       </div>
-      <div class="stat" data-animate>
-        <div class="stat__num">&lt;50<span class="accent">MB</span></div>
-        <div class="stat__label">Target image size</div>
+      <div class="stat">
+        <div class="stat__num">A/B<span class="accent"> OTA</span></div>
+        <div class="stat__label">Update Strategy</div>
       </div>
-      <div class="stat" data-animate>
-        <div class="stat__num">128<span class="accent">MB</span></div>
-        <div class="stat__label">Minimum RAM</div>
+      <div class="stat">
+        <div class="stat__num">90<span class="accent">%</span></div>
+        <div class="stat__label">System Optimization</div>
       </div>
     </div>
   </div>

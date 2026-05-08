@@ -23,6 +23,17 @@
   --col-muted:       #6b7a8d;
   --col-dim:         #3a4554;
 
+  /* HackingEdu Specific */
+  --col-he-cyan:     #00f5ff;
+  --col-he-blue:     #0066ff;
+  --col-he-glow:     rgba(0, 245, 255, 0.3);
+  --col-he-surface:  #0a1421;
+
+  /* Glassmorphism */
+  --glass-bg:        rgba(13, 17, 23, 0.7);
+  --glass-border:    rgba(255, 255, 255, 0.08);
+  --glass-blur:      blur(12px);
+
   /* Typography */
   --font-display: 'Syne', sans-serif;
   --font-body:    'DM Sans', sans-serif;
@@ -42,6 +53,7 @@
   --t-fast:   0.15s ease;
   --t-normal: 0.25s ease;
   --t-slow:   0.4s ease;
+  --t-reveal: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* ─── 2. Reset ──────────────────────────────────────────────── */
@@ -112,6 +124,13 @@ p  { color: var(--col-muted); font-size: 1rem; }
 
 .gradient-text {
   background: linear-gradient(110deg, var(--col-accent) 0%, var(--col-blue) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.he-gradient-text {
+  background: linear-gradient(110deg, var(--col-he-cyan) 0%, var(--col-he-blue) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -210,6 +229,44 @@ p  { color: var(--col-muted); font-size: 1rem; }
 @keyframes pulse-dot {
   0%,100% { opacity:1; transform: scale(1); }
   50%      { opacity:0.5; transform: scale(0.75); }
+}
+
+@keyframes reveal-up {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes reveal-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes floating {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity var(--t-reveal), transform var(--t-reveal);
+}
+
+.reveal--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal--in {
+  transform: scale(0.95);
+}
+
+.reveal--in.reveal--visible {
+  transform: scale(1);
+}
+
+.floating {
+  animation: floating 4s ease-in-out infinite;
 }
 
 /* ─── 7. Navigation ─────────────────────────────────────────── */

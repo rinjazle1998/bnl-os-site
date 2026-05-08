@@ -72,8 +72,22 @@
       });
     }, { threshold: 0.12 });
 
-    document.querySelectorAll('[data-animate]').forEach(function (el) {
+    document.querySelectorAll('[data-animate], .reveal').forEach(function (el) {
       observer.observe(el);
+    });
+
+    /* Specific handler for reveal class if needed */
+    var revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('reveal--visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.reveal').forEach(function (el) {
+      revealObserver.observe(el);
     });
   }
 
