@@ -27,7 +27,23 @@
       border-radius: var(--r-xl);
       padding: var(--s8);
       box-shadow: 0 40px 100px rgba(0, 0, 0, 0.4);
+      position: relative;
+      overflow: hidden;
     }
+    .auth-overlay {
+      position: absolute;
+      inset: 0;
+      background: var(--col-surface);
+      z-index: 20;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: var(--s8);
+      text-align: center;
+    }
+    .auth-overlay.active { display: flex; }
+    
     .auth-header { text-align: center; margin-bottom: var(--s7); }
     .auth-tabs { display: flex; gap: var(--s2); margin-bottom: var(--s6); background: rgba(255,255,255,0.03); padding: 5px; border-radius: var(--r-md); }
     .auth-tab { flex: 1; text-align: center; padding: 10px; border-radius: var(--r-sm); cursor: pointer; font-family: var(--font-mono); font-size: 0.8rem; transition: all 0.3s; color: var(--col-dim); }
@@ -51,6 +67,24 @@
 
 <div class="auth-page">
   <div class="auth-card reveal">
+    <!-- OVERLAY FOR VERIFICATION & FORGOT PASSWORD -->
+    <div id="auth-overlay" class="auth-overlay">
+      <h3 id="overlay-title" class="setup-title">Verify Your Identity</h3>
+      <p id="overlay-desc" class="mb-lg">We've sent a 6-digit code to your contact method.</p>
+      <div class="form-group" style="width: 100%;">
+        <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: var(--s5);">
+          <input type="text" class="form-input" style="width: 50px; text-align: center; font-size: 1.5rem;" maxlength="1">
+          <input type="text" class="form-input" style="width: 50px; text-align: center; font-size: 1.5rem;" maxlength="1">
+          <input type="text" class="form-input" style="width: 50px; text-align: center; font-size: 1.5rem;" maxlength="1">
+          <input type="text" class="form-input" style="width: 50px; text-align: center; font-size: 1.5rem;" maxlength="1">
+          <input type="text" class="form-input" style="width: 50px; text-align: center; font-size: 1.5rem;" maxlength="1">
+          <input type="text" class="form-input" style="width: 50px; text-align: center; font-size: 1.5rem;" maxlength="1">
+        </div>
+        <button class="btn btn--primary" style="width: 100%;" onclick="verifyOTP()">Confirm Code</button>
+      </div>
+      <a href="#" onclick="hideOverlay()" class="c-muted" style="font-size: 0.8rem;">Cancel and go back</a>
+    </div>
+
     <div class="auth-header">
       <a href="index.html" class="nav__logo" style="display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: var(--s4);">
         <img src="assets/hacking-edu-logo.svg" alt="HackingEdu Logo" style="width: 32px; height: 32px; border-radius: 4px;">
@@ -76,7 +110,7 @@
       </div>
       <button type="submit" class="btn btn--primary" style="width: 100%; background: var(--col-he-cyan); border-color: var(--col-he-cyan); color: #000;">Enter Laboratory</button>
       <div class="auth-footer">
-        <a href="#">Forgot your password?</a>
+        <a href="#" onclick="showForgotPassword()">Forgot your password?</a>
       </div>
     </form>
 
@@ -87,8 +121,12 @@
         <input type="text" class="form-input" placeholder="John Doe" required>
       </div>
       <div class="form-group">
-        <label class="form-label">Email Address</label>
+        <label class="form-label">Email Address (Requires Verification)</label>
         <input type="email" class="form-input" placeholder="name@company.com" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Phone Number (International Format)</label>
+        <input type="tel" class="form-input" placeholder="+84 000 000 000" required>
       </div>
       <div class="form-group">
         <label class="form-label">Password</label>
@@ -137,9 +175,30 @@
   document.querySelectorAll('form').forEach(form => {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-      alert('Authentication logic would connect here.\n\nTo prevent Injection, we recommend using Supabase or Firebase as the backend provider.');
+      const isSignup = form.id === 'signup-form';
+      showOverlay(isSignup ? 'Verify Your Account' : 'Security Check', 
+                  isSignup ? 'We sent a verification code to your email and phone.' : 'A login code has been sent.');
     });
   });
+
+  function showOverlay(title, desc) {
+    document.getElementById('overlay-title').innerText = title;
+    document.getElementById('overlay-desc').innerText = desc;
+    document.getElementById('auth-overlay').classList.add('active');
+  }
+
+  function hideOverlay() {
+    document.getElementById('auth-overlay').classList.remove('active');
+  }
+
+  function showForgotPassword() {
+    showOverlay('Reset Password', 'Enter your email to receive a secure reset link.');
+  }
+
+  function verifyOTP() {
+    alert('Verification Successful!\n\nTechnically, this would use Supabase Auth with SMTP/Twilio integration to verify the real code.');
+    hideOverlay();
+  }
 </script>
 
 <script src="app.js"></script>
