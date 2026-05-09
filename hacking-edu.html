@@ -95,21 +95,19 @@
 <nav class="nav" role="navigation">
   <div class="nav__inner">
     <a href="index.html" class="nav__logo">
-      <svg class="nav__logo-svg" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <polygon points="16,1 29,8.5 29,23.5 16,31 3,23.5 3,8.5" fill="none" stroke="#00f5ff" stroke-width="1.4" opacity="0.5"/>
-        <rect x="9" y="9" width="14" height="14" rx="2.5" fill="#00f5ff" opacity="0.12"/>
-        <rect x="9" y="9" width="14" height="14" rx="2.5" fill="none" stroke="#00f5ff" stroke-width="1.4"/>
-        <circle cx="16" cy="16" r="2.2" fill="#00f5ff"/>
-      </svg>
+      <img src="assets/hacking-edu-logo.svg" alt="HackingEdu Logo" class="nav__logo-svg" style="border-radius: 4px;">
       <span class="nav__logo-text">BNL<span class="nav__logo-accent"> HackingEdu</span></span>
     </a>
     <ul class="nav__links">
       <li><a href="index.html" class="nav__link">Home</a></li>
       <li><a href="hacking-edu.html" class="nav__link nav__link--active">HackingEdu</a></li>
-      <li><a href="setup.html" class="nav__link">Setup</a></li>
+      <li><a href="pricing.html" class="nav__link">Pricing</a></li>
       <li><a href="docs.html" class="nav__link">Docs</a></li>
     </ul>
-    <a href="setup.html" class="btn btn--primary btn--sm nav__cta">Get Started</a>
+    <div class="nav__auth">
+      <a href="auth.html#login" class="nav__link">Login</a>
+      <a href="auth.html#signup" class="btn btn--primary btn--sm">Sign Up</a>
+    </div>
   </div>
 </nav>
 
@@ -161,7 +159,8 @@
       <div class="he-card reveal" style="animation-delay: 0.1s">
         <div class="he-card__icon">🕸️</div>
         <h3>Lab Orchestration</h3>
-        <p>Deploy complex attack/defense scenarios with a single click. Our engine handles Docker networks, vulnerable VMs, and target instantiation so you can focus on the mission.</p>
+        <p class="mb-md">Deploy complex attack/defense scenarios with a single click. Our engine handles Docker networks, vulnerable VMs, and target instantiation.</p>
+        <img src="assets/hacking-edu-lab.png" alt="Lab Interface" style="width: 100%; border-radius: var(--r-md); border: 1px solid var(--col-border);">
       </div>
       <div class="he-card reveal" style="animation-delay: 0.2s">
         <div class="he-card__icon">🛡️</div>
@@ -172,6 +171,52 @@
         <div class="he-card__icon">📊</div>
         <h3>Skill Graph</h3>
         <p>Track your progress across 10+ specialized tracks from Programming and AI Engineering to Zero-Day Research and Social Engineering Defense.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING SECTION -->
+<section id="pricing" class="section">
+  <div class="container">
+    <header class="section-header section-header--center reveal">
+      <div class="section-label">Subscription</div>
+      <h2 class="section-title">Upgrade Your Skills.</h2>
+      <p class="section-sub">Choose the plan that fits your learning pace. Unlock Pro features and advanced labs.</p>
+    </header>
+    
+    <div class="setup-grid">
+      <!-- Free Plan -->
+      <div class="he-card reveal">
+        <div class="setup-header">
+          <h3 class="setup-title">Basic</h3>
+          <div style="font-size: 2rem; font-weight: 800; margin: var(--s2) 0;">$0 <span style="font-size: 0.9rem; color: var(--col-dim); font-weight: 400;">/ mo</span></div>
+        </div>
+        <ul style="list-style: none; padding: 0; margin-bottom: var(--s6);">
+          <li style="margin-bottom: var(--s2);">✓ Access to Basic Labs</li>
+          <li style="margin-bottom: var(--s2);">✓ AI Tutor (Limited)</li>
+          <li style="margin-bottom: var(--s2);">✓ Community Support</li>
+          <li style="margin-bottom: var(--s2); color: var(--col-dim);">✗ Advanced Exploitation Labs</li>
+          <li style="margin-bottom: var(--s2); color: var(--col-dim);">✗ Certification Vouchers</li>
+        </ul>
+        <a href="auth.html#signup" class="btn btn--outline" style="width: 100%;">Get Started</a>
+      </div>
+
+      <!-- Pro Plan -->
+      <div class="he-card reveal" style="border-color: var(--col-he-cyan); background: rgba(0, 245, 255, 0.03); animation-delay: 0.1s">
+        <div class="badge badge--accent" style="position: absolute; top: 20px; right: 20px;">MOST POPULAR</div>
+        <div class="setup-header">
+          <h3 class="setup-title" style="color: var(--col-he-cyan);">Pro Premium</h3>
+          <div style="font-size: 2rem; font-weight: 800; margin: var(--s2) 0; color: var(--col-he-cyan);">$29 <span style="font-size: 0.9rem; color: var(--col-dim); font-weight: 400;">/ mo</span></div>
+        </div>
+        <ul style="list-style: none; padding: 0; margin-bottom: var(--s6);">
+          <li style="margin-bottom: var(--s2);">✓ All Basic Features</li>
+          <li style="margin-bottom: var(--s2);">✓ Unlimited AI Tutor Guidance</li>
+          <li style="margin-bottom: var(--s2);">✓ Advanced Exploitation Labs</li>
+          <li style="margin-bottom: var(--s2);">✓ Monthly Certification Vouchers</li>
+          <li style="margin-bottom: var(--s2);">✓ Priority Zero-Day Alerts</li>
+        </ul>
+        <a href="auth.html#signup" class="btn btn--primary" style="width: 100%; background: var(--col-he-cyan); border-color: var(--col-he-cyan);">Go Pro Now</a>
       </div>
     </div>
   </div>

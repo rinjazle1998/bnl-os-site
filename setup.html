@@ -69,8 +69,13 @@
     <ul class="nav__links">
       <li><a href="index.html" class="nav__link">Home</a></li>
       <li><a href="hacking-edu.html" class="nav__link">HackingEdu</a></li>
-      <li><a href="setup.html" class="nav__link nav__link--active">Setup</a></li>
+      <li><a href="pricing.html" class="nav__link">Pricing</a></li>
+      <li><a href="docs.html" class="nav__link">Docs</a></li>
     </ul>
+    <div class="nav__auth">
+      <a href="auth.html#login" class="nav__link">Login</a>
+      <a href="auth.html#signup" class="btn btn--primary btn--sm">Sign Up</a>
+    </div>
   </div>
 </nav>
 
@@ -116,35 +121,28 @@
       <div class="setup-section setup-section--he reveal" style="animation-delay: 0.2s">
         <div class="setup-header">
           <h2 class="setup-title">HackingEdu App</h2>
-          <span class="setup-badge">Electron • Node.js • Docker</span>
+          <span class="setup-badge">Desktop Application • Security Suite</span>
         </div>
 
         <div class="step">
-          <div class="step-title" data-step="1">Prerequisites</div>
-          <p class="mb-sm">Ensure you have the following installed:</p>
-          <ul class="mb-md">
-            <li>• Node.js 20+</li>
-            <li>• Docker Desktop</li>
-            <li>• Python 3.10+</li>
-            <li>• Nmap & Wireshark</li>
-          </ul>
+          <div class="step-title" data-step="1">Download Installer</div>
+          <p class="mb-sm">Download the latest installer package for your operating system (Windows, Linux, or macOS):</p>
+          <a href="download.html" class="btn btn--sm btn--primary mb-md" style="background: var(--col-he-cyan); border-color: var(--col-he-cyan);">Get Installer</a>
         </div>
 
         <div class="step">
-          <div class="step-title" data-step="2">Install Dependencies</div>
-          <p class="mb-sm">Run npm install in the project root:</p>
-          <div class="code-snippet">npm install</div>
+          <div class="step-title" data-step="2">Install Application</div>
+          <p class="mb-sm">Run the installer and follow the on-screen instructions. The application will set up necessary sandboxed environments automatically.</p>
         </div>
 
         <div class="step">
-          <div class="step-title" data-step="3">Launch Dev Server</div>
-          <p class="mb-sm">Start the application in development mode:</p>
-          <div class="code-snippet">npm run dev</div>
+          <div class="step-title" data-step="3">Launch & Verify</div>
+          <p class="mb-sm">Launch BNL HackingEdu from your applications menu. On first run, it will perform a quick system check to ensure all security modules are active.</p>
         </div>
 
         <div class="callout callout--tip">
           <div class="callout__icon">💡</div>
-          <div>The app will automatically detect missing tools and offer to install them via the built-in Installer Engine.</div>
+          <div>The app includes a built-in update engine that will notify you when new security modules or lab environments are available.</div>
         </div>
       </div>
     </div>

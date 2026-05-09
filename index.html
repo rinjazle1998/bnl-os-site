@@ -7,7 +7,7 @@
   <meta http-equiv="X-Frame-Options" content="DENY" />
   <meta http-equiv="Referrer-Policy" content="no-referrer" />
   <title>BNL-OS — Embedded Linux Distribution</title>
-  <meta name="description" content="BNL-OS is a custom embedded Linux distribution being built with Yocto Project. Currently in development." />
+  <meta name="description" content="BNL-OS is a professional agentic operating system designed for human-AI symbiosis. Currently in development." />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="shortcut icon" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
@@ -121,10 +121,13 @@
     <ul class="nav__links" role="list">
       <li><a href="index.html"     class="nav__link nav__link--active">Home</a></li>
       <li><a href="hacking-edu.html" class="nav__link">HackingEdu</a></li>
-      <li><a href="setup.html"     class="nav__link">Setup</a></li>
+      <li><a href="pricing.html"     class="nav__link">Pricing</a></li>
       <li><a href="docs.html"      class="nav__link">Docs</a></li>
     </ul>
-    <a href="setup.html" class="btn btn--primary btn--sm nav__cta">Get Started</a>
+    <div class="nav__auth">
+      <a href="auth.html#login" class="nav__link">Login</a>
+      <a href="auth.html#signup" class="btn btn--primary btn--sm">Sign Up</a>
+    </div>
     <button class="nav__hamburger" id="nav-hamburger" aria-controls="nav-drawer" aria-expanded="false" aria-label="Open navigation menu">
       <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
     </button>
@@ -132,11 +135,11 @@
 </nav>
 <div class="nav__drawer" id="nav-drawer" role="dialog" aria-label="Mobile navigation">
   <a href="index.html"     class="nav__link">Home</a>
-  <a href="download.html"  class="nav__link">Download</a>
+  <a href="hacking-edu.html" class="nav__link">HackingEdu</a>
+  <a href="pricing.html"     class="nav__link">Pricing</a>
   <a href="docs.html"      class="nav__link">Docs</a>
-  <a href="changelog.html" class="nav__link">Changelog</a>
-  <a href="blog.html"      class="nav__link">Blog</a>
-  <a href="download.html"  class="btn btn--ghost mt-md">Release status</a>
+  <a href="auth.html#login"  class="nav__link">Login</a>
+  <a href="auth.html#signup" class="btn btn--primary mt-md">Sign Up</a>
 </div>
 
 <!-- HERO -->
@@ -167,12 +170,15 @@
           <span class="dl-card__title" style="font-size: 1.5rem;">BNL-OS Titan</span>
           <span class="badge badge--accent">AGENTIC OS</span>
         </div>
-        <p class="dl-card__desc">A custom Yocto-based Linux distribution where AI is the core, not an add-on. Featuring the Chronos Timeline and Sentinel Plane.</p>
+        <p class="dl-card__desc">A professional agentic operating system where AI is the core, not an add-on. Featuring the Chronos Timeline and Sentinel Plane.</p>
         <span class="btn btn--primary btn--sm" style="width: fit-content;">Learn More ↓</span>
       </a>
       <a href="hacking-edu.html" class="dl-card" style="text-decoration: none; cursor: pointer; border-color: var(--col-he-cyan);">
         <div class="dl-card__header">
-          <span class="dl-card__title" style="font-size: 1.5rem; color: var(--col-he-cyan);">HackingEdu App</span>
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <img src="assets/hacking-edu-logo.svg" alt="HackingEdu Logo" style="width: 24px; height: 24px; border-radius: 3px;">
+            <span class="dl-card__title" style="font-size: 1.5rem; color: var(--col-he-cyan);">HackingEdu App</span>
+          </div>
           <span class="badge" style="background: var(--col-he-glow); color: var(--col-he-cyan); border-color: var(--col-he-cyan);">SECURITY ACADEMY</span>
         </div>
         <p class="dl-card__desc">An AI-powered security education platform with automated lab orchestration and built-in privacy protection.</p>
@@ -190,22 +196,32 @@
         <div class="section-label">BNL-OS Titan Edition</div>
         <h2 class="section-title">A Brain for Your Machine.</h2>
         <p class="section-sub mb-lg">
-          BNL-OS is built on the Yocto Project, but its soul lies in its AI layers. 
+          BNL-OS is a next-generation platform where the soul lies in its AI layers. 
           We've moved beyond the traditional desktop metaphor into a narrative, event-driven experience.
         </p>
 
         <div class="step-list">
           <div class="he-card mb-md reveal" style="background: rgba(10, 20, 33, 0.5);">
-            <h3 style="color: var(--col-accent);">01. Sentinel Plane (The Immune System)</h3>
-            <p>A deterministic rule engine paired with AI analyzers. Sentinel monitors kernel hooks via eBPF and ensures every action is safe before it happens. Rollback is just a Btrfs snapshot away.</p>
+            <div style="display: flex; gap: 20px; align-items: start;">
+              <div style="flex: 1;">
+                <h3 style="color: var(--col-accent);">01. Sentinel Plane (The Immune System)</h3>
+                <p>A deterministic rule engine paired with AI analyzers. Sentinel monitors kernel hooks via eBPF and ensures every action is safe before it happens.</p>
+              </div>
+              <img src="assets/sentinel-dashboard.png" alt="Sentinel UI" style="width: 120px; border-radius: var(--r-md); border: 1px solid var(--col-border);">
+            </div>
           </div>
           <div class="he-card mb-md reveal" style="background: rgba(10, 20, 33, 0.5); animation-delay: 0.1s">
-            <h3 style="color: var(--col-yellow);">02. Chronos Timeline (The Narrative OS)</h3>
-            <p>Forget the file system. In BNL-OS, everything is an event. The Chronos Bar allows you to travel through the past (snapshots), manage the present (agents), and plan the future (intents).</p>
+            <div style="display: flex; gap: 20px; align-items: start;">
+              <div style="flex: 1;">
+                <h3 style="color: var(--col-yellow);">02. Chronos Timeline (The Narrative OS)</h3>
+                <p>Forget the file system. In BNL-OS, everything is an event. The Chronos Bar allows you to travel through the past and plan the future.</p>
+              </div>
+              <img src="assets/chronos-timeline.png" alt="Chronos UI" style="width: 120px; border-radius: var(--r-md); border: 1px solid var(--col-border);">
+            </div>
           </div>
           <div class="he-card mb-md reveal" style="background: rgba(10, 20, 33, 0.5); animation-delay: 0.2s">
             <h3 style="color: var(--col-blue);">03. Titan Council (The Negotiation Plane)</h3>
-            <p>A multi-agent system where specialized AI models negotiate resource allocation and task execution in the background, ensuring your system is always optimized without you lifting a finger.</p>
+            <p>A multi-agent system where specialized AI models negotiate resource allocation and task execution in the background.</p>
           </div>
         </div>
       </div>
@@ -336,7 +352,7 @@
       </svg>
           <span class="nav__logo-text">BNL<span class="nav__logo-accent">-OS</span></span>
         </a>
-        <p>Custom embedded Linux built from scratch with the Yocto Project.</p>
+        <p>Professional agentic operating system and security orchestration platform.</p>
       </div>
       <div class="footer__col">
         <div class="footer__col-title">Product</div>
@@ -345,10 +361,10 @@
         <a href="blog.html">Blog</a>
       </div>
       <div class="footer__col">
-        <div class="footer__col-title">Developers</div>
+        <div class="footer__col-title">Resources</div>
         <a href="docs.html">Documentation</a>
-        <a href="docs.html#quickstart">Quickstart</a>
-        <a href="docs.html#bsp">BSP Guide</a>
+        <a href="setup.html">Setup Guide</a>
+        <a href="docs.html#faq">FAQ</a>
       </div>
     </div>
     <div class="footer__bottom">

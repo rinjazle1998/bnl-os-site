@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portal — BNL HackingEdu</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .auth-page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at 0% 0%, rgba(0, 245, 255, 0.05), transparent 40%),
+                  radial-gradient(circle at 100% 100%, rgba(0, 212, 170, 0.05), transparent 40%);
+      padding: var(--s6);
+    }
+    .auth-card {
+      width: 100%;
+      max-width: 440px;
+      background: rgba(10, 20, 33, 0.8);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--col-border);
+      border-radius: var(--r-xl);
+      padding: var(--s8);
+      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.4);
+    }
+    .auth-header { text-align: center; margin-bottom: var(--s7); }
+    .auth-tabs { display: flex; gap: var(--s2); margin-bottom: var(--s6); background: rgba(255,255,255,0.03); padding: 5px; border-radius: var(--r-md); }
+    .auth-tab { flex: 1; text-align: center; padding: 10px; border-radius: var(--r-sm); cursor: pointer; font-family: var(--font-mono); font-size: 0.8rem; transition: all 0.3s; color: var(--col-dim); }
+    .auth-tab.active { background: var(--col-he-cyan); color: #000; font-weight: 700; }
+    
+    .form-group { margin-bottom: var(--s5); }
+    .form-label { display: block; font-family: var(--font-mono); font-size: 0.75rem; color: var(--col-muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .form-input { width: 100%; background: rgba(255,255,255,0.03); border: 1px solid var(--col-border); border-radius: var(--r-md); padding: 12px 16px; color: var(--col-text); font-family: var(--font-sans); transition: border-color 0.3s; }
+    .form-input:focus { outline: none; border-color: var(--col-he-cyan); background: rgba(255,255,255,0.06); }
+    
+    .auth-footer { margin-top: var(--s7); text-align: center; font-size: 0.8rem; color: var(--col-dim); }
+    .auth-footer a { color: var(--col-he-cyan); text-decoration: none; font-weight: 600; }
+    
+    .security-badge { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: var(--s8); font-family: var(--font-mono); font-size: 0.7rem; color: var(--col-green); opacity: 0.8; }
+    .security-badge svg { width: 14px; height: 14px; }
+
+    #signup-form { display: none; }
+  </style>
+</head>
+<body>
+
+<div class="auth-page">
+  <div class="auth-card reveal">
+    <div class="auth-header">
+      <a href="index.html" class="nav__logo" style="display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: var(--s4);">
+        <img src="assets/hacking-edu-logo.svg" alt="HackingEdu Logo" style="width: 32px; height: 32px; border-radius: 4px;">
+        <span class="nav__logo-text">BNL<span class="nav__logo-accent"> HackingEdu</span></span>
+      </a>
+      <p class="section-sub">Access the world's most advanced security orchestration platform.</p>
+    </div>
+
+    <div class="auth-tabs">
+      <div class="auth-tab active" onclick="switchTab('login')">Login</div>
+      <div class="auth-tab" onclick="switchTab('signup')">Sign Up</div>
+    </div>
+
+    <!-- LOGIN FORM -->
+    <form id="login-form">
+      <div class="form-group">
+        <label class="form-label">Email Address</label>
+        <input type="email" class="form-input" placeholder="name@company.com" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <input type="password" class="form-input" placeholder="••••••••" required>
+      </div>
+      <button type="submit" class="btn btn--primary" style="width: 100%; background: var(--col-he-cyan); border-color: var(--col-he-cyan); color: #000;">Enter Laboratory</button>
+      <div class="auth-footer">
+        <a href="#">Forgot your password?</a>
+      </div>
+    </form>
+
+    <!-- SIGNUP FORM -->
+    <form id="signup-form">
+      <div class="form-group">
+        <label class="form-label">Full Name</label>
+        <input type="text" class="form-input" placeholder="John Doe" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email Address</label>
+        <input type="email" class="form-input" placeholder="name@company.com" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <input type="password" class="form-input" placeholder="Minimum 8 characters" required>
+      </div>
+      <button type="submit" class="btn btn--primary" style="width: 100%; background: var(--col-he-cyan); border-color: var(--col-he-cyan); color: #000;">Create Secure Account</button>
+      <div class="auth-footer">
+        By signing up, you agree to our <a href="docs.html#terms">Terms of Service</a>.
+      </div>
+    </form>
+
+    <div class="security-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      ENCRYPTED • PROTECTED AGAINST SQL INJECTION • BNL SECURE
+    </div>
+  </div>
+</div>
+
+<script>
+  function switchTab(tab) {
+    const loginForm = document.getElementById('login-form');
+    const signupForm = document.getElementById('signup-form');
+    const tabs = document.querySelectorAll('.auth-tab');
+    
+    if (tab === 'login') {
+      loginForm.style.display = 'block';
+      signupForm.style.display = 'none';
+      tabs[0].classList.add('active');
+      tabs[1].classList.remove('active');
+    } else {
+      loginForm.style.display = 'none';
+      signupForm.style.display = 'block';
+      tabs[1].classList.add('active');
+      tabs[0].classList.remove('active');
+    }
+  }
+
+  // Handle URL hash for deep linking
+  window.addEventListener('DOMContentLoaded', () => {
+    if (window.location.hash === '#signup') {
+      switchTab('signup');
+    }
+  });
+
+  // Mock form submission
+  document.querySelectorAll('form').forEach(form => {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Authentication logic would connect here.\n\nTo prevent Injection, we recommend using Supabase or Firebase as the backend provider.');
+    });
+  });
+</script>
+
+<script src="app.js"></script>
+</body>
+</html>

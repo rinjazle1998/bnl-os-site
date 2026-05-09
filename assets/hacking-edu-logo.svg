@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="BNL HackingEdu mark">
+  <rect width="512" height="512" rx="96" fill="#080a0d"/>
+  <path d="M256 54 414 134v128c0 86-53 139-158 159C151 401 98 348 98 262V134L256 54Z" fill="#0f171d" stroke="#40d6c2" stroke-width="22" stroke-linejoin="round"/>
+  <path d="M180 170h58v58h36v-58h58v172h-58v-62h-36v62h-58V170Z" fill="#edf3f7"/>
+  <path d="M150 138h62m88 0h62M134 272h62m120 0h62M256 84v58m0 228v58" fill="none" stroke="#f3b957" stroke-width="16" stroke-linecap="round"/>
+</svg>
